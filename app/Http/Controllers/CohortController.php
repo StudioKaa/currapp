@@ -1,0 +1,127 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Education;
+use App\Cohort;
+use Illuminate\Http\Request;
+
+class CohortController extends Controller
+{
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $education = Education::find(request('education'));
+        $cohort = new Cohort();
+
+        return view('cohorts.form')
+            ->with('education', $education)
+            ->with('cohort', $cohort);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate(request(), [
+
+            'education' => 'required|integer',
+            'start_year' => 'required|integer',
+            'exam_year' => 'required|integer'
+
+        ]);
+
+        $cohort = new Cohort();
+
+        $cohort->education_id = request('education');
+        $cohort->start_year = request('start_year');
+        $cohort->exam_year = request('exam_year');
+
+        $cohort->save();
+
+        return redirect('/educations/' . request('education'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Cohort  $cohort
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Cohort $cohort)
+    {
+        $my_terms = array();
+        foreach($cohort->terms as $term)
+        {
+            $my_terms[$term->year_of_study][] = $term;
+        }
+
+        return view('cohorts.show')
+            ->with('cohort', $cohort)
+            ->with('terms', $my_terms);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Cohort  $cohort
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Cohort $cohort)
+    {
+        return view('cohorts.form')
+            ->with('education', $cohort->education)
+            ->with('cohort', $cohort);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Cohort  $cohort
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Cohort $cohort)
+    {
+        $this->validate(request(), [
+
+            'start_year' => 'required|integer',
+            'exam_year' => 'required|integer'
+
+        ]);
+
+        $cohort->start_year = request('start_year');
+        $cohort->exam_year = request('exam_year');
+
+        $cohort->save();
+
+        return redirect('/cohorts/' . $cohort->id);
+    }
+
+    public function delete(Cohort $cohort)
+    {
+        return view('cohorts.delete')
+            ->with('cohort', $cohort);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Cohort  $cohort
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Cohort $cohort)
+    {
+        $education_id = $cohort->education->id;
+        $cohort->delete();
+        return redirect('/educations/' . $education_id);
+    }
+}

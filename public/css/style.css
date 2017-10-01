@@ -1,0 +1,136 @@
+.navbar-brand{
+	margin-right: 0;
+}
+nav{
+	padding: .5rem 2rem !important;
+}
+
+.cohort-select{
+	background: none;
+	color: rgba(255,255,255,.5);
+	border: none;
+}
+
+.cohort-select:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.cohort-select > option{
+	color: black;
+}
+
+.main {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+
+.card-deck{
+	margin-top: 1rem;
+}
+
+.card-deck .card{
+	max-width: 25%;
+}
+
+.my-vertical-deck-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.my-deck-title{
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.my-vertical-deck:hover .plus-icon{
+	display: flex;
+}
+
+.plus-icon{
+	display: none;
+	align-items: center;
+}
+
+.my-vertical-deck{
+	flex: 1;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.my-vertical-deck:first-child{
+	padding-left: 0px;
+}
+.my-vertical-deck:last-child{
+	padding-right: 0px;
+}
+
+.week-numbers{
+	width: 70px;
+	padding-top: 75px;
+	flex: .2;
+}
+
+.week-numbers .card{
+	border-color: white;
+}
+
+.my-vertical-deck .card{
+	max-width: 100%;
+	border-radius: 0;
+	border-width: 2px;
+	border-bottom-width: 0px;
+}
+
+.my-vertical-deck .card:nth-child(2){
+	border-top-left-radius: .25rem;
+	border-top-right-radius: .25rem;
+}
+
+.my-vertical-deck .card:last-child{
+	border-bottom-width: 2px;
+	border-bottom-left-radius: .25rem;
+	border-bottom-right-radius: .25rem;
+}
+
+.my-vertical-deck .card .card-body{
+	padding: 15px;
+}
+
+.card.duration-0, .card.duration-1{
+	height: 60px;
+}
+.card.duration-4{
+	height: 240px;
+}
+
+.navbar-text > .navbar-text{
+	padding: 0px;
+}
+
+.btn.navbar-text:hover{
+	color: #fff;
+}
+
+.my-spacing{
+	margin: 10px 0;
+}
+
+.bg-danger a, .bg-success a, .bg-primary a{
+	color: white;
+}
+
+.bg-warning a{
+	color: black;
+}
