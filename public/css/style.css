@@ -127,10 +127,14 @@ footer p {
 	margin: 10px 0;
 }
 
-.bg-danger a, .bg-success a, .bg-primary a{
+.bg-danger a, .bg-success a, .bg-primary a, .bg-secondary a{
 	color: white;
 }
 
 .bg-warning a{
 	color: black;
+}
+
+label.btn{
+	cursor: pointer;
 }

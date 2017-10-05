@@ -44,5 +44,14 @@ Route::post('/lessons', 'LessonController@store');
 Route::patch('/lessons/{lesson}', 'LessonController@update');
 Route::delete('/lessons/{lesson}', 'LessonController@destroy');
 
+Route::get('/reviews/create', 'ReviewController@create');
+Route::get('reviews/{review}/edit', 'ReviewController@edit');
+Route::get('reviews/{review}/review', 'ReviewController@review');
+Route::get('reviews/{review}/delete', 'ReviewController@delete');
+Route::post('/reviews', 'ReviewController@store');
+Route::patch('/reviews/{review}/review', 'ReviewController@update_review');
+Route::patch('/reviews/{review}', 'ReviewController@update');
+Route::delete('/reviews/{review}', 'ReviewController@destroy');
+
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
