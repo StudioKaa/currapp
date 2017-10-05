@@ -41,7 +41,7 @@ Carbon::setLocale(config('app.locale')); ?>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             @if($review->tv_title == null)
-                                <a class="ml-3" target="_blank" href="#">(Trainersversie toevoegen)</a>
+                                <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Trainersversie toevoegen)</a>
                                 <span class="badge badge-danger">TV</span>
                             @else
                                 <a class="ml-3" target="_blank" href="{{ $review->tv_link }}">{{ $review->tv_title }}</a>
@@ -50,7 +50,7 @@ Carbon::setLocale(config('app.locale')); ?>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             @if($review->sv_title == null)
-                                <a class="ml-3" target="_blank" href="#">(Studentversie toevoegen)</a>
+                                <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Studentversie toevoegen)</a>
                                 <span class="badge badge-danger">SV</span>
                             @else
                                 <a class="ml-3" target="_blank" href="{{ $review->sv_link }}">{{ $review->sv_title }}</a>
@@ -74,6 +74,53 @@ Carbon::setLocale(config('app.locale')); ?>
                         {{ $review->status()->title }} ({{ $review->created_at->diffForHumans() }} door {{ $review->author->name }})
                     </div>
                 </div>
+                
+                <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
+
+                <div class="collapse" id="history-content">
+                @foreach($history as $review)
+                    <div class="card my-spacing border-{{ $review->status()->context_class }}">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    <a target="_blank" href="{{ $review->wv_link }}">{{ ucfirst($review->wv_title) }}</a>
+                                    <span class="badge badge-{{ $review->status()->context_class }}">TV</span>
+                                </h5>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @if($review->tv_title == null)
+                                    <span>(Trainersversie ontbreekt)</span>
+                                    <span class="badge badge-danger">TV</span>
+                                @else
+                                    <a class="ml-3" target="_blank" href="{{ $review->tv_link }}">{{ $review->tv_title }}</a>
+                                    <span class="badge badge-{{ $review->status()->context_class }}">TV</span>
+                                @endif
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @if($review->sv_title == null)
+                                    <span>(Studentversie ontbreekt)</span>
+                                    <span class="badge badge-danger">SV</span>
+                                @else
+                                    <a class="ml-3" target="_blank" href="{{ $review->sv_link }}">{{ $review->sv_title }}</a>
+                                    <span class="badge badge-{{ $review->status()->context_class }}">SV</span>
+                                @endif
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            @if($review->comment != null)
+                                <p>
+                                    <span class="text-muted">{{ $review->reviewer()->name }}: </span>
+                                    {{ $review->comment }}
+                                </p>
+                            @endif
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ $review->status()->title }} ({{ $review->created_at->diffForHumans() }} door {{ $review->author()->name }})
+                        </div>
+                    </div>
+                @endforeach
+                </div>
+
             @else
                 <div class="card my-spacing border-danger">
                     <ul class="list-group list-group-flush">

@@ -72,7 +72,10 @@ class LessonController extends Controller
     public function show(Lesson $lesson)
     {
 
-        $review = $lesson->reviews->first();
+        $history = $lesson->reviews;
+        $review = $history->first();
+        unset($history[0]);
+
         if($review != null)
         {
             $review->author = User::find($review->author_id);
@@ -85,6 +88,7 @@ class LessonController extends Controller
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
             ->with('review', $review)
+            ->with('history', $history)
             ->with('files', $lesson->files);
             //->with('author', $author);
     }

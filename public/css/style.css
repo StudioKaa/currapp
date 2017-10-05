@@ -138,3 +138,15 @@ footer p {
 label.btn{
 	cursor: pointer;
 }
+
+#history-title a span{
+	transform: rotate(90deg);
+	display: inline-block;
+	transition: transform .2s ease, margin-left .2s ease;
+	margin-left: 5px;
+}
+
+#history-title a.collapsed span{
+	transform: rotate(0deg);
+	margin-left: 0;
+}

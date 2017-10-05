@@ -50,7 +50,7 @@ Route::get('reviews/{review}/review', 'ReviewController@review');
 Route::get('reviews/{review}/delete', 'ReviewController@delete');
 Route::post('/reviews', 'ReviewController@store');
 Route::patch('/reviews/{review}/review', 'ReviewController@update_review');
-Route::patch('/reviews/{review}', 'ReviewController@update');
+Route::patch('/reviews/{review}/edit', 'ReviewController@update');
 Route::delete('/reviews/{review}', 'ReviewController@destroy');
 
 Auth::routes();

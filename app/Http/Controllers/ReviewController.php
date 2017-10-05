@@ -98,6 +98,7 @@ class ReviewController extends Controller
 
 
         $review->review_status_id = request('review_status_id');
+        $review->reviewer_id = \Auth::user()->id;
         $review->comment = request('comment');
         $review->save();
 
@@ -112,7 +113,12 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        return view('reviews.form')
+        return view('reviews.edit')
+            ->with('education', $review->lesson->lesson_type->term->cohort->education)
+            ->with('cohort', $review->lesson->lesson_type->term->cohort)
+            ->with('term', $review->lesson->lesson_type->term)
+            ->with('lesson_type', $review->lesson->lesson_type)
+            ->with('lesson', $review->lesson)
             ->with('review', $review);
     }
 
@@ -125,7 +131,20 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        $this->validate(request(), [
+
+            'tv_link' => 'nullable|url',
+            'sv_link' => 'nullable|url'
+
+        ]);
+
+        $review->tv_link = request('tv_link');
+        $review->sv_link = request('sv_link');
+        $review->tv_title = ($review->tv_link == null) ? null : "Trainersversie";
+        $review->sv_title = ($review->sv_link == null) ? null : "Studentversie";
+        $review->save();
+
+        return redirect('/lessons/' . $review->lesson->id);
     }
 
     /**
