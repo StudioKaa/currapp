@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\lesson_type;
+use App\Lesson_type;
 use App\Lesson;
 use Illuminate\Http\Request;
 use App\User;
