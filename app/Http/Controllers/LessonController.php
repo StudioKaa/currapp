@@ -137,6 +137,13 @@ class LessonController extends Controller
         return redirect('/lessons/' . $lesson->id);
     }
 
+
+    public function delete(Lesson $lesson)
+    {
+        return view('lessons.delete')
+            ->with('lesson', $lesson);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -145,6 +152,8 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
-        //
+        $term_id = $lesson->lesson_type->term->id;
+        $lesson->delete();
+        return redirect('/terms/' . $term_id);
     }
 }
