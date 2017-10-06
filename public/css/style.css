@@ -93,17 +93,6 @@ footer p {
 	border-bottom-width: 0px;
 }
 
-.my-vertical-deck .card:nth-child(2){
-	border-top-left-radius: .25rem;
-	border-top-right-radius: .25rem;
-}
-
-.my-vertical-deck .card:last-child{
-	border-bottom-width: 2px;
-	border-bottom-left-radius: .25rem;
-	border-bottom-right-radius: .25rem;
-}
-
 .my-vertical-deck .card .card-body{
 	padding: 15px;
 }
@@ -149,4 +138,8 @@ label.btn{
 #history-title a.collapsed span{
 	transform: rotate(0deg);
 	margin-left: 0;
+}
+
+.dropdown-menu-left{
+	left: -100px;
 }

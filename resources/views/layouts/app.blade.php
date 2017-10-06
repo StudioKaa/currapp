@@ -22,8 +22,19 @@
       <div class="btn-group">
         @yield('buttons-right')
         @if(Auth::check())
-          <a class="btn btn-outline-secondary navbar-text" href="#"><i class="fa fa-user"></i>&nbsp;{{ Auth::user()->name }}</a>
-          <a class="btn btn-outline-secondary navbar-text" href="/logout"><i class="fa fa-sign-out"></i></a>
+
+          <div class="dropdown btn-group">
+            <a class="btn btn-outline-secondary navbar-text dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="/users"><i class="fa fa-fw fa-users"></i>&nbsp;Gebruikers</a>
+              <a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i>&nbsp;{{ Auth::user()->name }}</a>
+              <a class="dropdown-item" href="/logout"><i class="fa fa-fw fa-sign-out"></i>&nbsp;Uitloggen</a>
+            </div>
+          </div>
+          
         @endif
       </div>
     </nav>
