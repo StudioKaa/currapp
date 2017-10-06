@@ -23,7 +23,7 @@ class LessonController extends Controller
     public function create()
     {
         //fix
-        $lesson_type = lesson_type::find($_GET['lesson_type']);
+        $lesson_type = Lesson_type::find($_GET['lesson_type']);
         $lesson = new Lesson();
         $lesson->duration = 1;
 
