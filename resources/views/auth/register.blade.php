@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('page-title')
+    > Nieuwe gebruiker
+@endsection
+
+@section('buttons-right')
+    <a class="btn btn-outline-secondary navbar-text" href="/users">
+        <i class="fa fa-times" aria-hidden="true"></i> Annuleren
+    </a>
+@endsection
+
 @section('content')
 
     <form method="POST" action="{{ route('register') }}">

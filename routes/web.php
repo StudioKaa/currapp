@@ -53,5 +53,7 @@ Route::patch('/reviews/{review}/review', 'ReviewController@update_review');
 Route::patch('/reviews/{review}/edit', 'ReviewController@update');
 Route::delete('/reviews/{review}', 'ReviewController@destroy');
 
+Route::get('/users', 'UserController@index');
+
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
