@@ -63,7 +63,7 @@
                         $i += $lesson->duration;
                         ?>
                         <div class="card duration-{{ $lesson->duration }} bg-{{ $lesson->status()->context_class }}">
-                            <div class="card-body d-flex flex-column justify-content-between" title="{{ $lesson->status()->title }}">
+                            <div class="card-body d-flex flex-column justify-content-center" title="{{ $lesson->status()->title }}">
                                 <p class="card-title">
                                     <a href="/lessons/{{ $lesson->id }}">{{ $lesson->title }}</a>
                                 </p>

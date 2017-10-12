@@ -66,11 +66,11 @@ footer p {
 
 .my-vertical-deck{
 	flex: 1;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding: 0 10px;
 }
 .my-vertical-deck:first-child{
-	padding-left: 0px;
+	padding-left: 0;
+	padding-right: 0;
 }
 .my-vertical-deck:last-child{
 	padding-right: 0px;
@@ -78,7 +78,7 @@ footer p {
 
 .week-numbers{
 	width: 70px;
-	padding-top: 75px;
+	padding-top: 65px;
 	flex: .2;
 }
 
@@ -93,15 +93,37 @@ footer p {
 	border-bottom-width: 0px;
 }
 
-.my-vertical-deck .card .card-body{
-	padding: 15px;
+.my-vertical-deck .card-body{
+	padding: 10px 15px;
+}
+
+.my-vertical-deck .card-title{
+	margin-bottom: 0 !important;
 }
 
 .card.duration-0, .card.duration-1{
 	height: 60px;
 }
+.card.duration-2{
+	height: 120px;
+}
+.card.duration-3{
+	height: 180px;
+}
 .card.duration-4{
 	height: 240px;
+}
+.card.duration-5{
+	height: 300px;
+}
+.card.duration-6{
+	height: 360px;
+}
+.card.duration-7{
+	height: 420px;
+}
+.card.duration-8{
+	height: 480px;
 }
 
 .navbar-text > .navbar-text{
