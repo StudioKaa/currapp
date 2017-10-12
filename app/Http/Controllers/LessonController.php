@@ -6,6 +6,7 @@ use App\Lesson_type;
 use App\Lesson;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
 {
@@ -152,6 +153,15 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
+        foreach($lesson->reviews as $review)
+        {
+            Storage::disk('spaces')->delete([
+                $review->wv_do_path,
+                $review->tv_do_path,
+                $review->sv_do_path
+            ]);
+        }
+
         $term_id = $lesson->lesson_type->term->id;
         $lesson->delete();
         return redirect('/terms/' . $term_id);

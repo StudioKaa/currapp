@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <form method="POST" action="/reviews/{{ $review->id }}/edit">
+    <form method="POST" action="/reviews/{{ $review->id }}/edit" enctype="multipart/form-data">
       {{ method_field('PATCH') }}
 
     	@include('layouts/errors')
@@ -46,21 +46,21 @@
 	    	</div>
   		</div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar WV</label>
+        <label class="col-sm-2 col-form-label">Werkversie</label>
         <div class="col-sm-10">
-          <a target="_blank" href="{{ $review->wv_link }}">{{ $review->wv_title }}</a>
+          <a target="_blank" href="/reviews/{{ $review->id }}/wv">{{ $review->wv_filename }}</a>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar TV</label>
+        <label class="col-sm-2 col-form-label">Trainersversie</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="tv_link" value="{{ old('tv_link', $review->tv_link) }}">
+          <input type="file" class="form-control-file" name="tv_file">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar SV</label>
+        <label class="col-sm-2 col-form-label">Studentenversie</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="sv_link" value="{{ old('sv_link', $review->sv_link) }}">
+          <input type="file" class="form-control-file" name="sv_file">
         </div>
       </div>
 

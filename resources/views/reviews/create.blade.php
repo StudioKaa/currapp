@@ -16,7 +16,7 @@
 
 @section('content')
 
-    <form method="POST" action="/reviews">
+    <form method="POST" action="/reviews" enctype="multipart/form-data">
 
     	@include('layouts/errors')
 
@@ -65,23 +65,23 @@
 
 
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar WV</label>
+        <label class="col-sm-2 col-form-label">Werkversie</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="wv_link" value="{{ old('wv_link') }}">
+          <input type="file" class="form-control-file" name="wv_file">
           <small class="form-text text-muted">Verplicht.</small>
         </div>
       </div>
 	  	<div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar TV</label>
+        <label class="col-sm-2 col-form-label">Trainersversie</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="tv_link" value="{{ old('tv_link') }}">
+          <input type="file" class="form-control-file" name="tv_file">
           <small class="form-text text-muted">Optioneel, kan ook later toegevoegd worden.</small>
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar SV</label>
+        <label class="col-sm-2 col-form-label">Studentenversie</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="sv_link" value="{{ old('sv_link') }}">
+          <input type="file" class="form-control-file" name="sv_file">
           <small class="form-text text-muted">Optioneel, kan ook later toegevoegd worden.</small>
         </div>
       </div>

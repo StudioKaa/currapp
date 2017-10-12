@@ -48,6 +48,9 @@ Route::get('/reviews/create', 'ReviewController@create');
 Route::get('reviews/{review}/edit', 'ReviewController@edit');
 Route::get('reviews/{review}/review', 'ReviewController@review');
 Route::get('reviews/{review}/delete', 'ReviewController@delete');
+Route::get('reviews/{review}/wv', 'ReviewController@get_file_wv');
+Route::get('reviews/{review}/tv', 'ReviewController@get_file_tv');
+Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
 Route::post('/reviews', 'ReviewController@store');
 Route::patch('/reviews/{review}/review', 'ReviewController@update_review');
 Route::patch('/reviews/{review}/edit', 'ReviewController@update');
@@ -57,3 +60,9 @@ Route::get('/users', 'UserController@index');
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('upload', function() {
+    $files = Storage::disk('spaces')->files();
+
+    return $files;
+});

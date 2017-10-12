@@ -11,7 +11,7 @@ class Review extends Model
     public function status()
     {
     	$status = Review_status::find($this->review_status_id);
-    	if($status->title == 'Compleet' && $this->sv_link == null)
+    	if($status->title == 'Compleet' && $this->sv_filename == null)
 		{
 			$status = new Review_status();
 			$status->title = "Compleet, SV mist";

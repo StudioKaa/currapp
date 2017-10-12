@@ -61,10 +61,10 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('review_statuses')->insert([
             'title' => 'In-review',
-            'context_class' => 'danger'
+            'context_class' => 'warning'
         ]);
         DB::table('review_statuses')->insert([
-            'title' => 'Complete',
+            'title' => 'Compleet',
             'context_class' => 'success'
         ]);
     }

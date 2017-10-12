@@ -58,9 +58,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar WV</label>
+        <label class="col-sm-2 col-form-label">Werkversie</label>
         <div class="col-sm-10">
-          <a target="_blank" href="{{ $review->wv_link }}">{{ $review->wv_title }}</a>
+          <a target="_blank" href="/reviews/{{ $review->id }}/wv">{{ $review->wv_filename }}</a>
         </div>
       </div>
       <div class="form-group row">

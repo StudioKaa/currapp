@@ -7,6 +7,7 @@ use App\Lesson;
 use App\User;
 use App\Review_status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ReviewController extends Controller
 {
@@ -45,11 +46,12 @@ class ReviewController extends Controller
 
             'lesson' => 'required|integer',
             'reviewer_id' => 'integer',
-            'wv_link' => 'required|url',
-            'tv_link' => 'nullable|url',
-            'sv_link' => 'nullable|url'
+            'wv_file' => 'required|file',
+            'tv_file' => 'nullable|file',
+            'sv_file' => 'nullable|file'
 
         ]);
+
 
         $reviewer_id = request('reviewer_id');
         $reviewer_id = ($reviewer_id == 0) ? null : $reviewer_id;
@@ -59,16 +61,69 @@ class ReviewController extends Controller
         $review->review_status_id = ($reviewer_id == null) ? 1 : 2;
         $review->author_id = \Auth::user()->id;
         $review->reviewer_id = $reviewer_id; 
-        $review->wv_link = request('wv_link');
-        $review->tv_link = request('tv_link');
-        $review->sv_link = request('sv_link');
-        $review->wv_title = "Werkversie";
-        $review->tv_title = ($review->tv_link == null) ? null : "Trainersversie";
-        $review->sv_title = ($review->sv_link == null) ? null : "Studentversie";
-
         $review->save();
 
-    return redirect('/lessons/' . request('lesson'));
+        $this->save_files($request, $review);
+        
+        return redirect('/lessons/' . request('lesson'));
+    }
+
+    public function save_files($request, $review)
+    {
+        //build general filename
+        $filename = date('Ymd');
+        $filename .= '_' . $review->lesson->lesson_type->title;
+        $filename .= '_' . $review->lesson->lesson_type->term->title;
+        $filename .= '_' . $review->lesson->week_start;
+        $filename .= '_' . $review->lesson->getFileName();
+        
+        //save wv
+        if($request->hasFile('wv_file'))
+        {
+            $wv_ext = request()->wv_file->getClientOriginalExtension();
+            $review->wv_filename = $filename . '.' . $wv_ext;
+            $wv_do = 'review_' . $review->id . '_wv.' . $wv_ext;
+            $review->wv_do_path = Storage::disk('spaces')->putFileAs('uploads/reviews', request()->wv_file, $wv_do, 'private');
+        }
+
+        //save tv
+        if($request->hasFile('tv_file'))
+        {
+            $tv_ext = request()->tv_file->getClientOriginalExtension();
+            $review->tv_filename = $filename . '_TV.' . $tv_ext;
+            $tv_do = 'review_' . $review->id . '_tv.' . $tv_ext;
+            $review->tv_do_path = Storage::disk('spaces')->putFileAs('uploads/reviews', request()->tv_file, $tv_do, 'private');
+        }
+
+        //save sv
+        if($request->hasFile('sv_file'))
+        {
+            $sv_ext = request()->sv_file->getClientOriginalExtension();
+            $review->sv_filename = $filename . '_SV.' . $sv_ext;
+            $sv_do = 'review_' . $review->id . '_sv.' . $sv_ext;
+            $review->sv_do_path = Storage::disk('spaces')->putFileAs('uploads/reviews', request()->sv_file, $sv_do, 'private');
+        }
+        
+        $review->save();
+    }
+
+    public function get_file_wv(Review $review)
+    {
+        header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->wv_do_path));
+        header('Content-Disposition: attachment; filename="' . $review->wv_filename . '"');
+        return Storage::disk('spaces')->get($review->wv_do_path);
+    }
+    public function get_file_tv(Review $review)
+    {
+        header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->tv_do_path));
+        header('Content-Disposition: attachment; filename="' . $review->tv_filename . '"');
+        return Storage::disk('spaces')->get($review->tv_do_path);
+    }
+    public function get_file_sv(Review $review)
+    {
+        header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->sv_do_path));
+        header('Content-Disposition: attachment; filename="' . $review->sv_filename . '"');
+        return Storage::disk('spaces')->get($review->sv_do_path);
     }
 
 
@@ -133,16 +188,12 @@ class ReviewController extends Controller
     {
         $this->validate(request(), [
 
-            'tv_link' => 'nullable|url',
-            'sv_link' => 'nullable|url'
+            'tv_file' => 'nullable|file',
+            'sv_file' => 'nullable|file'
 
         ]);
 
-        $review->tv_link = request('tv_link');
-        $review->sv_link = request('sv_link');
-        $review->tv_title = ($review->tv_link == null) ? null : "Trainersversie";
-        $review->sv_title = ($review->sv_link == null) ? null : "Studentversie";
-        $review->save();
+        $this->save_files($request, $review);
 
         return redirect('/lessons/' . $review->lesson->id);
     }

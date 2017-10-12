@@ -36,4 +36,10 @@ class Lesson extends Model
 		return $this->reviews->first()->status();
 	}
 
+	public function getFileName()
+	{
+		$string = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), $this->title);
+		return str_replace(' ', '_', $string);
+	}
+
 }

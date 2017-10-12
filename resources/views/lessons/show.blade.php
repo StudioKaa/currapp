@@ -35,25 +35,25 @@ Carbon::setLocale(config('app.locale')); ?>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <h5 class="card-title d-flex justify-content-between align-items-center">
-                                <a target="_blank" href="{{ $review->wv_link }}">{{ ucfirst($review->wv_title) }}</a>
-                                <span class="badge badge-{{ $review->status()->context_class }}">TV</span>
+                                <a target="_blank" href="/reviews/{{ $review->id }}/wv">{{ ucfirst($review->wv_filename) }}</a>
+                                <span class="badge badge-{{ $review->status()->context_class }}">WV</span>
                             </h5>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @if($review->tv_title == null)
+                            @if($review->tv_filename == null)
                                 <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Trainersversie toevoegen)</a>
                                 <span class="badge badge-danger">TV</span>
                             @else
-                                <a class="ml-3" target="_blank" href="{{ $review->tv_link }}">{{ $review->tv_title }}</a>
+                                <a class="ml-3" target="_blank" href="/reviews/{{ $review->id }}/tv">{{ $review->tv_filename }}</a>
                                 <span class="badge badge-{{ $review->status()->context_class }}">TV</span>
                             @endif
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @if($review->sv_title == null)
+                            @if($review->sv_filename == null)
                                 <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Studentversie toevoegen)</a>
                                 <span class="badge badge-danger">SV</span>
                             @else
-                                <a class="ml-3" target="_blank" href="{{ $review->sv_link }}">{{ $review->sv_title }}</a>
+                                <a class="ml-3" target="_blank" href="/reviews/{{ $review->id }}/sv">{{ $review->sv_filename }}</a>
                                 <span class="badge badge-{{ $review->status()->context_class }}">SV</span>
                             @endif
                         </li>
@@ -83,25 +83,25 @@ Carbon::setLocale(config('app.locale')); ?>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <h5 class="card-title d-flex justify-content-between align-items-center">
-                                    <a target="_blank" href="{{ $review->wv_link }}">{{ ucfirst($review->wv_title) }}</a>
-                                    <span class="badge badge-{{ $review->status()->context_class }}">TV</span>
+                                    <a target="_blank" href="/reviews/{{ $review->id }}/wv">{{ $review->wv_filename }}</a>
+                                    <span class="badge badge-{{ $review->status()->context_class }}">WV</span>
                                 </h5>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                @if($review->tv_title == null)
+                                @if($review->tv_filename == null)
                                     <span>(Trainersversie ontbreekt)</span>
                                     <span class="badge badge-danger">TV</span>
                                 @else
-                                    <a class="ml-3" target="_blank" href="{{ $review->tv_link }}">{{ $review->tv_title }}</a>
+                                    <a class="ml-3" target="_blank" href="/reviews/{{ $review->id }}/tv">{{ $review->tv_filename }}</a>
                                     <span class="badge badge-{{ $review->status()->context_class }}">TV</span>
                                 @endif
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                @if($review->sv_title == null)
+                                @if($review->sv_filename == null)
                                     <span>(Studentversie ontbreekt)</span>
                                     <span class="badge badge-danger">SV</span>
                                 @else
-                                    <a class="ml-3" target="_blank" href="{{ $review->sv_link }}">{{ $review->sv_title }}</a>
+                                    <a class="ml-3" target="_blank" href="/reviews/{{ $review->id }}/sv">{{ $review->sv_filename }}</a>
                                     <span class="badge badge-{{ $review->status()->context_class }}">SV</span>
                                 @endif
                             </li>
@@ -127,7 +127,7 @@ Carbon::setLocale(config('app.locale')); ?>
                         <li class="list-group-item">
                             <h5 class="card-title d-flex justify-content-between align-items-center">
                                 <span>&nbsp;</span>
-                                <span class="badge badge-danger">TV</span>
+                                <span class="badge badge-danger">WV</span>
                             </h5>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
