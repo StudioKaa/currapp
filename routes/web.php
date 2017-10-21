@@ -60,7 +60,7 @@ Route::get('/users', 'UserController@index');
 
 Route::get('/amoclient/ready', function(){
 	return redirect('/educations');
-});
+})->name('logout');
 Route::get('/login', function(){
 	return view('login.login');
-});
+})->name('login');
