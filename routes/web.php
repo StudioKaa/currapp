@@ -58,5 +58,9 @@ Route::delete('/reviews/{review}', 'ReviewController@destroy');
 
 Route::get('/users', 'UserController@index');
 
-Auth::routes();
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/amoclient/ready', function(){
+	return redirect('/educations');
+});
+Route::get('/login', function(){
+	return view('login.login');
+});
