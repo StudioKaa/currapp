@@ -60,9 +60,3 @@ Route::get('/users', 'UserController@index');
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('upload', function() {
-    $files = Storage::disk('spaces')->files();
-
-    return $files;
-});
