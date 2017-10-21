@@ -1726,16 +1726,16 @@
         },
         {
             "name": "studiokaa/amoclient",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudioKaa/amoclient.git",
-                "reference": "cbcd4e57e219ad499dcd45e43c8d178ace2d16b4"
+                "reference": "3d177d8f45307dfe02cade961b6c9d6ba9304463"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudioKaa/amoclient/zipball/cbcd4e57e219ad499dcd45e43c8d178ace2d16b4",
-                "reference": "cbcd4e57e219ad499dcd45e43c8d178ace2d16b4",
+                "url": "https://api.github.com/repos/StudioKaa/amoclient/zipball/3d177d8f45307dfe02cade961b6c9d6ba9304463",
+                "reference": "3d177d8f45307dfe02cade961b6c9d6ba9304463",
                 "shasum": ""
             },
             "require": {
@@ -1765,7 +1765,7 @@
                 }
             ],
             "description": "Client for amologin",
-            "time": "2017-10-21T19:20:37+00:00"
+            "time": "2017-10-21T20:22:50+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
