@@ -17,8 +17,8 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('lesson_id')->unsigned();
             $table->integer('review_status_id')->unsigned();
-            $table->integer('author_id')->unsigned();
-            $table->integer('reviewer_id')->unsigned()->nullable();
+            $table->string('author_id');
+            $table->string('reviewer_id')->nullable();
             $table->string('wv_filename')->nullable();
             $table->string('wv_do_path')->nullable();
             $table->string('tv_filename')->nullable();

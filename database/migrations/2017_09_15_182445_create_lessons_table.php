@@ -20,11 +20,6 @@ class CreateLessonsTable extends Migration
             $table->integer('duration');
             $table->string('title');
             $table->text('description')->nullable();
-            //$table->integer('lesson_status_id')->unsigned();
-            //$table->integer('werkversie_id')->unsigned()->nullable();
-            //$table->integer('tv_id')->unsigned()->nullable();
-            //$table->integer('sv_id')->unsigned()->nullable();
-            //$table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('lesson_type_id')
