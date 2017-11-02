@@ -8,6 +8,12 @@ use App\User;
 
 class Review extends Model
 {
+
+    const STATUS_CONCEPT = 1;
+    const STATUS_IN_REVIEW = 2;
+    const STATUS_COMPLETE = 3;
+
+
     public function status()
     {
     	$status = Review_status::find($this->review_status_id);

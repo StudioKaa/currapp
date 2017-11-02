@@ -52,13 +52,26 @@ class ReviewController extends Controller
 
         ]);
 
+        switch (request('reviewer_id')) {
+            case '-1':
+                $reviewer_id = null;
+                $review_status_id = Review::STATUS_CONCEPT;
+                break;
+            
+            case '0':
+                $reviewer_id = null;
+                $review_status_id = Review::STATUS_COMPLETE;
+                break;
 
-        $reviewer_id = request('reviewer_id');
-        $reviewer_id = ($reviewer_id == 0) ? null : $reviewer_id;
+            default:
+                $reviewer_id = request('reviewer_id');
+                $review_status_id = Review::STATUS_IN_REVIEW;
+                break;
+        }
 
         $review = new Review();
         $review->lesson_id = request('lesson');
-        $review->review_status_id = ($reviewer_id == null) ? 1 : 2;
+        $review->review_status_id = $review_status_id;
         $review->author_id = \Auth::user()->id;
         $review->reviewer_id = $reviewer_id; 
         $review->save();

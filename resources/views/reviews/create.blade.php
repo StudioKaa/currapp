@@ -55,7 +55,8 @@
         <label class="col-sm-2 col-form-label">Resonant</label>
         <div class="col-sm-10">
           <select class="form-control" name="reviewer_id">
-            <option value="0">geen (opslaan als concept)</option>
+            <option value="-1">geen (opslaan als concept)</option>
+            <option value="0">geen (forceer compleet)</option>
             @foreach($users as $user):
               <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
