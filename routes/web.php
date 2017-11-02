@@ -61,6 +61,15 @@ Route::get('/users', 'UserController@index');
 Route::get('/amoclient/ready', function(){
 	return redirect('/educations');
 });
-Route::get('/login', function(){
-	return view('login.login');
-})->name('login');
+
+Route::view('/login', 'login.production')->name('login');
+
+if(env('APP_ENV') == 'local')
+{
+	Route::view('/login', 'login.local')->name('login');
+	Route::post('/login', function(){
+		$user = \App\User::find(request('id'));
+		\Auth::login($user);
+		return redirect('home');
+	});
+}
