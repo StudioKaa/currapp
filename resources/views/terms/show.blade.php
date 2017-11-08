@@ -25,9 +25,49 @@
     </a>
 @endsection
 
-@section('content')
+@push('styles')
+    <link rel="stylesheet" href="{{ URL::asset('css/term.css') }}">
+@endpush
 
-    <div class="my-vertical-deck-container">
+@section('term')
+
+    <div class="term-grid">
+        @for($i = 1; $i <= 8; $i++)
+            <div class="week-number">
+                <h5>{{ $i }}</h5>
+            </div>
+        @endfor
+
+        @foreach ($lesson_types as $lesson_type)
+            
+            <div class="lesson-type-title">
+                <div>
+                    <h5>{{ $lesson_type->title }}</h5>
+                    <p>{{ $lesson_type->sub_title }}</p>
+                </div>
+                <div class="icons btn-group">
+                    <a href="/lesson_types/{{ $lesson_type->id }}/edit" class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="/lessons/create?lesson_type={{ $lesson_type->id }}" class="btn btn-outline-secondary"><i class="fa fa-plus" aria-hidden="true"></i> Les</a>
+                </div>
+            </div>
+            
+            @foreach($lesson_type->lessons()->get() as $lesson) 
+                <div class="card duration-{{ $lesson->duration }} bg-{{ $lesson->status()->context_class }} start-{{ $lesson->week_start }}">
+                    <div class="card-body">
+                        <p class="card-title"><a href="/lessons/{{ $lesson->id }}">{{ $lesson->title }}</a></p>
+                    </div>
+                </div>
+            @endforeach
+
+        @endforeach
+    </div>
+
+    <div class="tests">
+        <h3>Toetsen:</h3>
+    </div>
+
+
+    <!--<div class="my-vertical-deck-container">
 
         <div class="my-vertical-deck week-numbers">
             @for($i = 1; $i <= 8; $i++)
@@ -40,6 +80,7 @@
         </div>
 
         @foreach ($lesson_types as $lesson_type)
+
             <div class="my-vertical-deck">
                 <div class="my-deck-title">
                     <div>
@@ -73,6 +114,6 @@
                 @endfor
             </div>
         @endforeach
-    </div>
+    </div>-->
     
 @endsection
