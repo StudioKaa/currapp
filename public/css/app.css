@@ -43,3 +43,7 @@ footer > p{
 .cohort-select > option{
 	color: black;
 }
+
+.dropdown-menu-left{
+	left: -100px;
+}

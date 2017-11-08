@@ -38,7 +38,6 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="/users"><i class="fa fa-fw fa-users"></i>&nbsp;Gebruikers</a>
                       <a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i>&nbsp;{{ Auth::user()->name }}</a>
                       <a class="dropdown-item" href="/amoclient/logout"><i class="fa fa-fw fa-sign-out"></i>&nbsp;Uitloggen</a>
                     </div>
