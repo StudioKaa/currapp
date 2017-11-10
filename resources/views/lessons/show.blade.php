@@ -143,7 +143,10 @@ Carbon::setLocale(config('app.locale')); ?>
                         </li>
                     </ul>
                     <div class="card-body">
-                        <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary">Eerste versie uploaden</a>
+                        <div class="btn-group review-buttons">
+                            <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary">Eerste versie uploaden</a>
+                            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> Wiki-link</a>
+                        </div>
                     </div>
                     <div class="card-footer text-muted">
                         Nieuw
