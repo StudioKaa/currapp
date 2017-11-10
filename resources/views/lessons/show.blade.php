@@ -65,10 +65,13 @@ Carbon::setLocale(config('app.locale')); ?>
                                 {{ $review->comment }}
                             </p>
                         @endif
-                        <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary">Nieuwe versie uploaden</a>
-                        @if($review->status()->title == 'Concept' || $review->status()->title == 'In-review')
-                            <a href="/reviews/{{ $review->id }}/review" class="card-link btn btn-outline-primary">Reviewen</a>
-                        @endif
+                        <div class="btn-group review-buttons">
+                            @if($review->status()->title == 'Concept' || $review->status()->title == 'In-review')
+                                <a href="/reviews/{{ $review->id }}/review" class="card-link btn btn-outline-primary"><i class="fa fa-eye"></i> Reviewen</a>
+                            @endif
+                            <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-plus"></i> Bestand</a>
+                            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> Wiki-link</a>
+                        </div>
                     </div>
                     <div class="card-footer text-muted">
                         {{ $review->status()->title }} ({{ $review->created_at->diffForHumans() }} door {{ $review->author->name }})

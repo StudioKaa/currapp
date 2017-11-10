@@ -122,18 +122,33 @@ class ReviewController extends Controller
 
     public function get_file_wv(Review $review)
     {
+        if($review->wiki)
+        {
+            return redirect($review->wv_do_path);
+        }
+
         header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->wv_do_path));
         header('Content-Disposition: attachment; filename="' . $review->wv_filename . '"');
         return Storage::disk('spaces')->get($review->wv_do_path);
     }
     public function get_file_tv(Review $review)
     {
+        if($review->wiki)
+        {
+            return redirect($review->tv_do_path);
+        }
+
         header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->tv_do_path));
         header('Content-Disposition: attachment; filename="' . $review->tv_filename . '"');
         return Storage::disk('spaces')->get($review->tv_do_path);
     }
     public function get_file_sv(Review $review)
     {
+        if($review->wiki)
+        {
+            return redirect($review->sv_do_path);
+        }
+
         header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->sv_do_path));
         header('Content-Disposition: attachment; filename="' . $review->sv_filename . '"');
         return Storage::disk('spaces')->get($review->sv_do_path);
@@ -211,14 +226,49 @@ class ReviewController extends Controller
         return redirect('/lessons/' . $review->lesson->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Review $review)
+    public function addwiki(Request $request)
     {
-        //
+        $review = new Review();
+        $review->author = \Auth::user();
+
+        $lesson = Lesson::find($_GET['lesson']);
+
+        return view('reviews.addwiki')
+            ->with('education', $lesson->lesson_type->term->cohort->education)
+            ->with('cohort', $lesson->lesson_type->term->cohort)
+            ->with('term', $lesson->lesson_type->term)
+            ->with('lesson_type', $lesson->lesson_type)
+            ->with('lesson', $lesson)
+            ->with('review', $review)
+            ->with('users', User::all());
+    }
+
+    public function savewiki(Request $request)
+    {
+        $this->validate(request(), [
+
+            'lesson' => 'required|integer',
+            'wiki' => 'required|string'
+
+        ]);
+
+        $wiki_base = 'https://wiki.amo.rocks/wiki/';
+
+        $review = new Review();
+        $review->lesson_id = request('lesson');
+        $review->review_status_id = Review::STATUS_COMPLETE;
+        $review->author_id = \Auth::user()->id;
+        $review->wiki = true;
+        $review->reviewer_id = null; 
+        $review->wv_filename = 'Wiki: werkversie';
+        $review->wv_do_path = $wiki_base . request('wiki');
+        $review->tv_filename = 'Wiki: docentversie';
+        $review->tv_do_path = $wiki_base . request('wiki') . '/Docent';
+        $review->sv_filename = 'Wiki: studentversie';
+        $review->sv_do_path = $wiki_base . request('wiki') . '/pdf';
+
+        $review->save();
+        
+        return redirect('/lessons/' . request('lesson'));
     }
 }

@@ -12,6 +12,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('lessons', 'LessonController', ['except' => ['index']]);
 
 	Route::resource('reviews', 'ReviewController', ['except' => ['index', 'show']]);
+	Route::get('reviews/addwiki', 'ReviewController@addwiki');
+	Route::post('reviews/addwiki', 'ReviewController@savewiki');
 	Route::get('reviews/{review}/review', 'ReviewController@review');
 	Route::get('reviews/{review}/wv', 'ReviewController@get_file_wv');
 	Route::get('reviews/{review}/tv', 'ReviewController@get_file_tv');

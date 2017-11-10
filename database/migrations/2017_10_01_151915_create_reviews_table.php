@@ -18,13 +18,14 @@ class CreateReviewsTable extends Migration
             $table->integer('lesson_id')->unsigned();
             $table->integer('review_status_id')->unsigned();
             $table->string('author_id');
+            $table->boolean('wiki')->default(false);
             $table->string('reviewer_id')->nullable();
-            $table->string('wv_filename')->nullable();
-            $table->string('wv_do_path')->nullable();
-            $table->string('tv_filename')->nullable();
-            $table->string('tv_do_path')->nullable();
-            $table->string('sv_filename')->nullable();
-            $table->string('sv_do_path')->nullable();
+            $table->text('wv_filename')->nullable();
+            $table->text('wv_do_path')->nullable();
+            $table->text('tv_filename')->nullable();
+            $table->text('tv_do_path')->nullable();
+            $table->text('sv_filename')->nullable();
+            $table->text('sv_do_path')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
 

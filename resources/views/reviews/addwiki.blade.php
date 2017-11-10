@@ -5,7 +5,7 @@
     > <a class="navbar-text" href="/cohorts/{{ $cohort->id }}">{{ $cohort->start_year }} - {{ $cohort->exam_year }}</a>
     > <a class="navbar-text" href="/terms/{{ $term->id }}">{{ $term->title }}</a>
     > <a class="navbar-text" href="/lessons/{{ $lesson->id }}">{{ $lesson_type->title }}: {{ $lesson->title }}</a>
-    > Nieuwe versie uploaden
+    > Wiki-link toevoegen
 @endsection
 
 @section('buttons-right')
@@ -16,7 +16,7 @@
 
 @section('content')
   
-    <form method="POST" action="/reviews" enctype="multipart/form-data">
+    <form method="POST" action="/reviews/addwiki" enctype="multipart/form-data">
 
     	@include('layouts/errors')
 
@@ -52,38 +52,12 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Resonant</label>
+        <label class="col-sm-2 col-form-label">Link naar wiki:</label>
         <div class="col-sm-10">
-          <select class="form-control" name="reviewer_id">
-            <option value="-1">geen (opslaan als concept)</option>
-            <option value="0">geen (forceer compleet)</option>
-            @foreach($users as $user):
-              <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-          </select>
-        </div>
-      </div>
-
-
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Werkversie</label>
-        <div class="col-sm-10">
-          <input type="file" class="form-control-file" name="wv_file">
-          <small class="form-text text-muted">Verplicht.</small>
-        </div>
-      </div>
-	  	<div class="form-group row">
-        <label class="col-sm-2 col-form-label">Trainersversie</label>
-        <div class="col-sm-10">
-          <input type="file" class="form-control-file" name="tv_file">
-          <small class="form-text text-muted">Optioneel, kan ook later toegevoegd worden.</small>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Studentenversie</label>
-        <div class="col-sm-10">
-          <input type="file" class="form-control-file" name="sv_file">
-          <small class="form-text text-muted">Optioneel, kan ook later toegevoegd worden.</small>
+          <div class="input-group">
+            <span class="input-group-addon">https://wiki.amo.rocks/wiki/</span>
+            <input type="text" class="form-control" name="wiki">
+          </div>
         </div>
       </div>
 

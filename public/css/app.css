@@ -5,7 +5,7 @@
 }
 
 .grid-container{
-	height: 100vh;
+	min-height: 100vh;
 	grid-row-gap: 2em;
 }
 
@@ -44,6 +44,33 @@ footer > p{
 	color: black;
 }
 
+/* -- dropdown in navbar -- */
 .dropdown-menu-left{
 	left: -100px;
+}
+
+/* -- lesson.show -- */
+/*.card .review-buttons{
+	visibility: hidden;
+}
+
+.card:hover .review-buttons{
+	visibility: visible;
+}*/
+
+.my-spacing{
+	margin: 10px 0;
+}
+
+/* -- lesson.show history-link -- */
+#history-title a span{
+	transform: rotate(90deg);
+	display: inline-block;
+	transition: transform .2s ease, margin-left .2s ease;
+	margin-left: 5px;
+}
+
+#history-title a.collapsed span{
+	transform: rotate(0deg);
+	margin-left: 0;
 }

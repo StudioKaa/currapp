@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
 {
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -92,7 +86,6 @@ class LessonController extends Controller
             ->with('review', $review)
             ->with('history', $history)
             ->with('files', $lesson->files);
-            //->with('author', $author);
     }
 
     /**
