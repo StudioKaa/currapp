@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
 	Route::patch('/reviews/{review}/review', 'ReviewController@update_review');
 
+	Route::resource('files', 'FileController', ['except' => ['index', 'edit', 'update']]);
+
 });
 
 Route::get('/amoclient/ready', function(){
