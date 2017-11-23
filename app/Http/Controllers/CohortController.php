@@ -71,7 +71,10 @@ class CohortController extends Controller
      */
     public function show(Cohort $cohort)
     {
+        //return $cohort->terms;
+
         return view('cohorts.show')
+            ->with('education', $cohort->education)
             ->with('cohort', $cohort)
             ->with('terms', $cohort->terms);
     }

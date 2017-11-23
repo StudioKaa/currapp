@@ -50,7 +50,7 @@ class EducationController extends Controller
 
             'title' => 'required|alpha_dash',
             'duration' => 'required|integer|min:1',
-            'terms_per_year' => 'required|integer|between:1,10',
+            'terms_per_year' => 'required|integer|min:1',
 
         ]);
 

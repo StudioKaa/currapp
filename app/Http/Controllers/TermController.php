@@ -67,9 +67,9 @@ class TermController extends Controller
         $this->validate(request(), [
 
             'cohort' => 'required|integer',
-            'order' => 'required|integer|min:0',
+            'order' => 'required|integer|min:1',
             'sub_title' => 'present',
-            'duration' => 'required|integer|between:1,10',
+            'duration' => 'required|integer|min:1',
 
         ]);
 
@@ -126,9 +126,9 @@ class TermController extends Controller
     {
         $this->validate(request(), [
 
-            'order' => 'required|integer|min:0',
+            'order' => 'required|integer|min:1',
             'sub_title' => 'present',
-            'duration' => 'required|integer|between:1,10',
+            'duration' => 'required|integer|min:1',
 
         ]);
 

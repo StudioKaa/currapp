@@ -34,11 +34,7 @@
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Periodes per jaar</label>
       <div class="col-sm-10">
-        <select class="form-control" name="terms_per_year">
-          @for($i = 1; $i <= 10; $i++)
-            <option value="{{ $i }}" <?php echo $i == 4 ? 'selected' : ''; ?>>{{ $i }}</option>
-          @endfor
-        </select>
+        <input type="text" class="form-control" name="terms_per_year" value="4">
       </div>
     </div>
   @endif
