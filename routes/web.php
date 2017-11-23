@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::redirect('/', '/educations', 301);
 	Route::redirect('/home', '/educations', 301);
 	Route::get('/educations', 'EducationController@index')->name('home');
+	Route::get('/educations/{slug}/now', 'EducationController@now');
 	Route::get('/educations/{education}', 'EducationController@show');
 	Route::get('/cohorts/{cohort}', 'CohortController@show');
 	Route::get('/terms/{term}', 'TermController@show');

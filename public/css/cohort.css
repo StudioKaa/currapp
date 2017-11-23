@@ -6,3 +6,7 @@
 .cohort-grid > .link-card {
     margin: 0;
 }
+
+.schoolyear{
+	grid-column-start: 1;
+}

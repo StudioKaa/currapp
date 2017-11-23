@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +18,25 @@ class EducationController extends Controller
         $educations = Education::all();
         return view('educations.index')
             ->with('educations', $educations);
+    }
+
+    public function now($slug)
+    {
+        $education = Education::where('title', $slug)->first();
+        $schoolyear = (date('m') > 6) ? date('Y') : date('Y')-1;
+        
+        for($i = 0; $i < $education->duration; $i++)
+        {
+            $studyyear = $i+1;
+            $cohort = $education->cohorts()->where('start_year', $schoolyear-$i)->first();
+            $terms[$studyyear] = $cohort->terms()
+                ->whereBetween('order', [$education->terms_per_year*$i+1, $education->terms_per_year*$studyyear])
+                ->get();
+        }
+
+        return view('educations.now')
+            ->with('education', $education)
+            ->with('terms', $terms);
     }
 
     /**
