@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <ol class="my-breadcrumb navbar-text">
         <li class="breadcrumb-item">
-            <a href="/educations/{{ $education->id }}">{{ $education->title }}</a>
+            <a href="/educations/{{ $education->title }}/now">{{ $education->title }}</a>
         </li>
         <li class="breadcrumb-item">
             <a href="/cohorts/{{ $cohort->id }}">{{ $cohort->title }}</a>
@@ -21,10 +21,13 @@
     </ol>
 @endsection
 
-@section('buttons-right')
-    <a class="btn btn-outline-secondary navbar-text" href="/cohorts/{{ $cohort->id }}">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i> Overzicht
+@section('buttons-student')
+    <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> Terug
     </a>
+@endsection
+
+@section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/lesson_types/create?term={{ $term->id }}">
         <i class="fa fa-plus" aria-hidden="true"></i> Lesvorm
     </a>

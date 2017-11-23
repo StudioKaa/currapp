@@ -5,7 +5,7 @@ Carbon::setLocale(config('app.locale')); ?>
 @extends('layouts.app')
 
 @section('page-title')
-    > <a class="navbar-text" href="/educations/{{ $education->id }}">{{ $education->title }}</a>
+    > <a class="navbar-text" href="/educations/{{ $education->title }}/now">{{ $education->title }}</a>
     > <a class="navbar-text" href="/cohorts/{{ $cohort->id }}">{{ $cohort->start_year }} - {{ $cohort->exam_year }}</a>
     > <a class="navbar-text" href="/terms/{{ $term->id }}">{{ $term->title }}</a>
     > {{ $lesson_type->title }}: {{ $lesson->title }}

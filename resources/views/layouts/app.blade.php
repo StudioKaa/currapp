@@ -29,6 +29,7 @@
             </div>
             <div class="btn-group">
                 @if(Auth::check())
+                    @yield('buttons-student')
                     @if(Auth::user()->type == 'teacher')
                         @yield('buttons-right')
                     @endif

@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <ol class="my-breadcrumb navbar-text">
         <li class="breadcrumb-item">
-            <a href="/educations/{{ $cohort->education->id }}">{{ $cohort->education->title }}</a>
+            <a href="/educations/{{ $cohort->education->title }}/now">{{ $cohort->education->title }}</a>
         </li>
         <li class="breadcrumb-item">
             {{ $cohort->title }}

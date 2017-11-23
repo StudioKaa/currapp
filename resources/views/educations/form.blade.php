@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('buttons-right')
-    <?php $href = $education->exists ? '/educations/' . $education->id : '/educations'; ?>
-    <a class="btn btn-outline-secondary navbar-text" href="{{ $href }}">
+    <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
         <i class="fa fa-times" aria-hidden="true"></i> Annuleren
     </a>
 @endsection
