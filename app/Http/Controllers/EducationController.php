@@ -25,13 +25,17 @@ class EducationController extends Controller
         $education = Education::where('title', $slug)->first();
         $schoolyear = (date('m') > 6) ? date('Y') : date('Y')-1;
         
+        $terms = array();
         for($i = 0; $i < $education->duration; $i++)
         {
             $studyyear = $i+1;
             $cohort = $education->cohorts()->where('start_year', $schoolyear-$i)->first();
-            $terms[$studyyear] = $cohort->terms()
-                ->whereBetween('order', [$education->terms_per_year*$i+1, $education->terms_per_year*$studyyear])
-                ->get();
+            if($cohort != null)
+            {
+                $terms[$studyyear] = $cohort->terms()
+                    ->whereBetween('order', [$education->terms_per_year*$i+1, $education->terms_per_year*$studyyear])
+                    ->get();
+            }
         }
 
         return view('educations.now')
