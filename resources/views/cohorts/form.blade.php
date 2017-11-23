@@ -36,12 +36,15 @@
       <input type="text" class="form-control" name="start_year" value="{{ old('start_year', $cohort->start_year) }}">
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Examen-jaar</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="exam_year" value="{{ old('exam_year', $cohort->exam_year) }}">
+  @if(!$cohort->exists)
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Periodes aanmaken</label>
+      <div class="col-sm-10">
+        <input type="checkbox" name="create_terms" value="yes" checked>
+         <small class="form-text text-muted">Maakt in dit cohort vast alle periodes aan.</small>
+      </div>
     </div>
-  </div>
+  @endif
 
   {{ csrf_field() }}
 

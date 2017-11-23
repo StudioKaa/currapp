@@ -18,12 +18,7 @@
   </head>
 
   <body>
-
-    @hasSection('term')
-        <div class="term-container">
-    @else
-        <div class="grid-container">
-    @endif
+      <div class="grid-container">
         <nav class="navbar navbar-dark bg-dark">
             <div>
                 <a class="navbar-brand" href="{{ url('educations') }}">Curr<span class="text-muted">App</span></a><div class="navbar-text">&nbsp;@yield('page-title')</div>
@@ -47,7 +42,6 @@
               </div>
         </nav>
         <div class="container main">
-            @yield('term')
             @yield('content')
         </div>
         <footer class="container">

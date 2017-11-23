@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/term.css') }}">
 @endpush
 
-@section('grid')
+@section('content')
 
     <div class="term-grid">
         @for($i = 1; $i <= 8; $i++)

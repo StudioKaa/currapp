@@ -21,20 +21,19 @@
     </a>
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="{{ URL::asset('css/cohort.css') }}">
+@endpush
+
 @section('content')
 
-    @foreach ($terms as $year_of_study)
-        <div class="card-deck">
-            @foreach ($year_of_study as $term)
-                <div class="card">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h4 class="card-title">{{ $term->title }}</h4>
-                        <p class="card-text">{{ $term->sub_title }}</p>
-                        <a class="btn btn-outline-primary" href="{{ url('terms', [$term->id]) }}">Bekijk {{ $term->title }}</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
+    <div class="cohort-grid columns-{{ $cohort->education->terms_per_year }}">
+        @foreach ($terms as $term)
+            <a class="term-span-{{ $term->duration }}" href="{{ url('terms', [$term->id]) }}">
+                <h4>{{ $term->title }}</h4>
+                <p class="card-text">{{ $term->sub_title }}</p>
+            </a>
+        @endforeach
+    </div>
     
 @endsection

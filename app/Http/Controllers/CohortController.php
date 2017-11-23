@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Education;
 use App\Cohort;
 use Illuminate\Http\Request;
+use App\Term;
 
 class CohortController extends Controller
 {
@@ -35,17 +36,29 @@ class CohortController extends Controller
 
             'education' => 'required|integer',
             'start_year' => 'required|integer',
-            'exam_year' => 'required|integer'
 
         ]);
 
+        $education = Education::find(request('education'));
         $cohort = new Cohort();
 
         $cohort->education_id = request('education');
         $cohort->start_year = request('start_year');
-        $cohort->exam_year = request('exam_year');
-
+        $cohort->exam_year = $cohort->start_year + $education->duration;
         $cohort->save();
+
+        if(request('create_terms') == 'yes')
+        {
+            $terms = $education->duration * $education->terms_per_year;
+            for($i = 1; $i <= $terms; $i++)
+            {
+                $term = new Term();
+                $term->cohort_id = $cohort->id;
+                $term->order = $i;
+                $term->duration = 1;
+                $term->save();
+            }
+        }
 
         return redirect('/educations/' . request('education'));
     }
@@ -58,15 +71,9 @@ class CohortController extends Controller
      */
     public function show(Cohort $cohort)
     {
-        $my_terms = array();
-        foreach($cohort->terms as $term)
-        {
-            $my_terms[$term->year_of_study][] = $term;
-        }
-
         return view('cohorts.show')
             ->with('cohort', $cohort)
-            ->with('terms', $my_terms);
+            ->with('terms', $cohort->terms);
     }
 
     /**
@@ -94,12 +101,11 @@ class CohortController extends Controller
         $this->validate(request(), [
 
             'start_year' => 'required|integer',
-            'exam_year' => 'required|integer'
 
         ]);
 
         $cohort->start_year = request('start_year');
-        $cohort->exam_year = request('exam_year');
+        $cohort->exam_year = $cohort->start_year + $cohort->education->duration;
 
         $cohort->save();
 

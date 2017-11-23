@@ -16,9 +16,9 @@ class CreateTermsTable extends Migration
         Schema::create('terms', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cohort_id')->unsigned();
-            $table->string('title');
+            $table->string('order');
             $table->string('sub_title')->nullable();
-            $table->integer('year_of_study');
+            $table->integer('duration');
             $table->timestamps();
 
             $table->foreign('cohort_id')

@@ -3,11 +3,11 @@
 	/*
 		this will make sure you see exactly the 8 weeks on screen
 		the rows are:
-			60px - lesson-type-titles
-			9 weeks - 100vh-navbar-titles-gap / 8
+			60px for lesson-type-titles
+			8 times: 1 week = (100vh-navbar-titles-gap / 8)
 	*/
 	grid-template-columns: 70px auto;
-	grid-template-rows: 60px repeat(8, calc((100vh - 120px - 1em) / 8));
+	grid-template-rows: 60px repeat(8, calc((100vh - 120px - 2em) / 8));
 	grid-auto-flow: column;
 	grid-column-gap: 1em;
 }

@@ -49,6 +49,7 @@ class TermController extends Controller
     {
         $cohort = Cohort::find($_GET['cohort']);
         $term = new Term();
+        $term->duration = 1;
 
         return view('terms.form')
             ->with('term', $term)
@@ -66,18 +67,18 @@ class TermController extends Controller
         $this->validate(request(), [
 
             'cohort' => 'required|integer',
-            'title' => 'required|alpha_dash',
+            'order' => 'required|integer|min:0',
             'sub_title' => 'present',
-            'year_of_study' => 'required|integer|between:1,3'
+            'duration' => 'required|integer|between:1,10',
 
         ]);
 
         $term = new Term();
 
         $term->cohort_id = request('cohort');
-        $term->title = request('title');
+        $term->order = request('order');
         $term->sub_title = request('sub_title');
-        $term->year_of_study = request('year_of_study');
+        $term->duration = request('duration');
 
         $term->save();
 
@@ -125,15 +126,15 @@ class TermController extends Controller
     {
         $this->validate(request(), [
 
-            'title' => 'required|alpha_dash',
+            'order' => 'required|integer|min:0',
             'sub_title' => 'present',
-            'year_of_study' => 'required|integer|between:1,3'
+            'duration' => 'required|integer|between:1,10',
 
         ]);
 
-        $term->title = request('title');
+        $term->order = request('order');
         $term->sub_title = empty(request('sub_title')) ? null : request('sub_title');
-        $term->year_of_study = request('year_of_study');
+        $term->duration = request('duration');
 
         $term->save();
 

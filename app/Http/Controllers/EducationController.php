@@ -48,13 +48,17 @@ class EducationController extends Controller
     {
         $this->validate(request(), [
 
-            'title' => 'required|alpha_dash'
+            'title' => 'required|alpha_dash',
+            'duration' => 'required|integer|min:1',
+            'terms_per_year' => 'required|integer|between:1,10',
 
         ]);
 
         $education = new Education();
 
         $education->title = request('title');
+        $education->duration = request('duration');
+        $education->terms_per_year = request('terms_per_year');
 
         $education->save();
 

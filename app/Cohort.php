@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cohort extends Model
 {
+
+    protected $appends = ['title'];
+
     public function education()
 	{
 		return $this->belongsTo(Education::class);
@@ -16,12 +19,12 @@ class Cohort extends Model
     	return $this->hasMany(Term::class);
     }
 
-    public function getTitle($nospaces = false)
+    public function getTitleAttribute($nospaces = false)
     {
-    	$title = $this->start_year;
-    	$title .= $nospaces ? '-' : ' - ';
-		$title .= $this->exam_year;
+        $title = $this->start_year;
+        $title .= $nospaces ? '-' : ' - ';
+        $title .= $this->exam_year;
 
-		return $title;
+        return $title;
     }
 }

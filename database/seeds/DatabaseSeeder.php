@@ -17,9 +17,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@test.com',
             'type' => 'teacher'
         ]);
+        DB::table('users')->insert([
+            'id' => 'lln',
+            'name' => 'Leerling Test',
+            'email' => 'lln@test.com',
+            'type' => 'student'
+        ]);
 
         DB::table('educations')->insert([
             'title' => 'AMO',
+            'duration' => 3,
+            'terms_per_year' => 4
         ]);
         DB::table('cohorts')->insert([
             'education_id' => 1,
@@ -34,8 +42,8 @@ class DatabaseSeeder extends Seeder
         
         DB::table('terms')->insert([
             'cohort_id' => 1,
-            'title' => 'p1',
-            'year_of_study' => 1
+            'order' => 1,
+            'duration' => 1
         ]);
 
         DB::table('lesson_types')->insert([

@@ -39,10 +39,10 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Titel</label>
+    <label class="col-sm-2 col-form-label">Periode-nummer</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="title" value="{{ old('title', $term->title) }}">
-      <small class="form-text text-muted">Gebruik in ieder cohort dezelfde naam voor dezelfde periode.</small>
+      <input type="text" class="form-control" name="order" value="{{ old('order', $term->order) }}">
+      <small class="form-text text-muted">Dit nummer loopt door over de jaren (bijv. periode 1 t/m 12).</small>
     </div>
   </div>
   <div class="form-group row">
@@ -52,13 +52,10 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Jaar</label>
+    <label class="col-sm-2 col-form-label">Duur</label>
     <div class="col-sm-10">
-      <select class="form-control" name="year_of_study">
-        <option {{ (old('year_of_study', $term->year_of_study) == '1' ? "selected":"") }}>1</option>
-        <option {{ (old('year_of_study', $term->year_of_study) == '2' ? "selected":"") }}>2</option>
-        <option {{ (old('year_of_study', $term->year_of_study) == '3' ? "selected":"") }}>3</option>
-      </select>
+      <input type="text" class="form-control" name="duration" value="{{ old('duration', $term->duration) }}">
+      <small class="form-text text-muted">Voor het overspannen van meerdere periodes (bijv. BPV).</small>
     </div>
   </div>
 

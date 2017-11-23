@@ -1,16 +1,9 @@
-.grid-container, .term-container{
+.grid-container{
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 60px 1fr 60px;
-}
-
-.grid-container{
 	min-height: 100vh;
 	grid-row-gap: 2em;
-}
-
-.term-container{
-	grid-row-gap: 1em;
 }
 
 nav{

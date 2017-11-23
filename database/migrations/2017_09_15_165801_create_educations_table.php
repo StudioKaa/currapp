@@ -17,6 +17,8 @@ class CreateEducationsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->integer('duration');
+            $table->integer('terms_per_year');
             $table->timestamps();
         });
     }
