@@ -6,7 +6,9 @@ use App\Lesson_type;
 use App\Lesson;
 use Illuminate\Http\Request;
 use App\User;
+use App\Review;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class LessonController extends Controller
 {
@@ -17,7 +19,6 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //fix
         $lesson_type = Lesson_type::find($_GET['lesson_type']);
         $lesson = new Lesson();
         $lesson->duration = 1;
@@ -67,15 +68,22 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
-
-        $history = $lesson->reviews;
-        $review = $history->first();
-        unset($history[0]);
-
-        if($review != null)
+        if(Auth::user()->type == 'teacher')
         {
-            $review->author = User::find($review->author_id);
+            $history = $lesson->reviews;
+            $review = $history->first();
+            unset($history[0]);
         }
+        else
+        {
+            $history = null;
+            $review = $lesson->reviews()
+                ->where('review_status_id', Review::STATUS_COMPLETE)
+                ->where('sv_do_path', '<>', null)
+                ->first();
+        }
+
+        //dd( empty($lesson->files));
 
         return view('lessons.show')
             ->with('education', $lesson->lesson_type->term->cohort->education)

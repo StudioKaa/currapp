@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/term.css') }}">
 @endpush
 
-@section('term')
+@section('grid')
 
     <div class="term-grid">
         @for($i = 1; $i <= 8; $i++)
@@ -45,10 +45,12 @@
                     <h5>{{ $lesson_type->title }}</h5>
                     <p>{{ $lesson_type->sub_title }}</p>
                 </div>
-                <div class="icons btn-group">
-                    <a href="/lesson_types/{{ $lesson_type->id }}/edit" class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a href="/lessons/create?lesson_type={{ $lesson_type->id }}" class="btn btn-outline-secondary"><i class="fa fa-plus" aria-hidden="true"></i> Les</a>
-                </div>
+                @if(Auth::user()->type == 'teacher')
+                    <div class="icons btn-group">
+                        <a href="/lesson_types/{{ $lesson_type->id }}/edit" class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="/lessons/create?lesson_type={{ $lesson_type->id }}" class="btn btn-outline-secondary"><i class="fa fa-plus" aria-hidden="true"></i> Les</a>
+                    </div>
+                @endif
             </div>
             
             @foreach($lesson_type->lessons()->get() as $lesson) 
@@ -61,59 +63,5 @@
 
         @endforeach
     </div>
-
-    <div class="tests">
-        <h3>Toetsen:</h3>
-    </div>
-
-
-    <!--<div class="my-vertical-deck-container">
-
-        <div class="my-vertical-deck week-numbers">
-            @for($i = 1; $i <= 8; $i++)
-                <div class="card d-flex align-items-center duration-1">
-                    <div class="card-body">
-                        <h5>{{ $i }}</h5>
-                    </div>
-                </div>
-            @endfor
-        </div>
-
-        @foreach ($lesson_types as $lesson_type)
-
-            <div class="my-vertical-deck">
-                <div class="my-deck-title">
-                    <div>
-                        <h5>{{ $lesson_type->title }}</h5>
-                        <p>{{ $lesson_type->sub_title }}&nbsp;</p>
-                    </div>
-                    <div class="plus-icon btn-group">
-                        <a href="/lesson_types/{{ $lesson_type->id }}/edit" class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <a href="/lessons/create?lesson_type={{ $lesson_type->id }}" class="btn btn-outline-secondary"><i class="fa fa-plus" aria-hidden="true"></i> Les</a>
-                    </div>
-                </div>
-                @for($i = 1; $i <= 8;)
-                    <?php
-                    $lesson = $lesson_type->lessons->where('week_start', $i)->first();
-                    if($lesson == null):
-                        $i += 1;
-                        ?>
-                        <div class="card duration-1 border-0"></div>
-                        <?php
-                    else:
-                        $i += $lesson->duration;
-                        ?>
-                        <div class="card duration-{{ $lesson->duration }} bg-{{ $lesson->status()->context_class }}">
-                            <div class="card-body d-flex flex-column justify-content-center" title="{{ $lesson->status()->title }}">
-                                <p class="card-title">
-                                    <a href="/lessons/{{ $lesson->id }}">{{ $lesson->title }}</a>
-                                </p>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                @endfor
-            </div>
-        @endforeach
-    </div>-->
     
 @endsection

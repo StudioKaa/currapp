@@ -9,6 +9,7 @@ use App\User;
 class Review extends Model
 {
 
+    const STATUS_NONE = 0;
     const STATUS_CONCEPT = 1;
     const STATUS_IN_REVIEW = 2;
     const STATUS_COMPLETE = 3;
