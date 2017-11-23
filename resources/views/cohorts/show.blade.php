@@ -29,7 +29,7 @@
 
     <div class="cohort-grid columns-{{ $cohort->education->terms_per_year }}">
         @foreach ($terms as $term)
-            <a class="term-span-{{ $term->duration }}" href="{{ url('terms', [$term->id]) }}">
+            <a class="link-card term-span-{{ $term->duration }}" href="{{ url('terms', [$term->id]) }}">
                 <h4>{{ $term->title }}</h4>
                 <p class="card-text">{{ $term->sub_title }}</p>
             </a>

@@ -8,15 +8,12 @@
 
 @section('content')
 
-    <div class="card-deck">
-        @foreach ($educations as $edu)
-            <div class="card">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h3 class="card-title">{{ $edu->title }}</h3>
-                    <p class="card-text">{{ $edu->description }}</p>
-                    <a class="btn btn-outline-primary" href="{{ url('educations', [$edu->id]) }}">Ga naar {{ $edu->title }}</a>
-                </div>
-            </div>
+    <div class="card-container">
+        @foreach ($educations as $education)
+            <a class="link-card" href="{{ url('educations', [$education->id]) }}">
+                <h4>{{ $education->title }}</h4>
+                <p class="card-text">{{ $education->description }}</p>
+            </a>
         @endforeach
     </div>
     

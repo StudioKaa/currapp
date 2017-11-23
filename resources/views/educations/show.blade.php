@@ -15,7 +15,17 @@
 
 @section('content')
 
-    <div class="card-deck">
+    <div class="card-container">
+        @foreach ($cohorts as $cohort)
+            <a class="link-card" href="{{ url('cohorts', [$cohort->id]) }}">
+                <h4>{{ $education->title }} {{ $cohort->title }}</h4>
+                <p class="card-text">{{ $cohort->description }}</p>
+            </a>
+        @endforeach
+    </div>
+
+
+    <!-- <div class="card-deck">
         @foreach ($cohorts as $cohort)
             <div class="card">
                 <div class="card-body d-flex flex-column justify-content-between">
@@ -24,6 +34,6 @@
                 </div>
             </div>
         @endforeach
-    </div>
+    </div> -->
     
 @endsection
