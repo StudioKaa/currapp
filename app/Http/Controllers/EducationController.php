@@ -32,11 +32,17 @@ class EducationController extends Controller
             $cohort = $education->cohorts()->where('start_year', $schoolyear-$i)->first();
             if($cohort != null)
             {
-                $terms[$studyyear] = $cohort->terms()
+                $term = $cohort->terms()
                     ->whereBetween('order', [$education->terms_per_year*$i+1, $education->terms_per_year*$studyyear])
                     ->get();
+                if(count($term))
+                {
+                    $terms[$studyyear] = $term;
+                }
             }
         }
+
+        //return $terms;
 
         return view('educations.now')
             ->with('education', $education)
