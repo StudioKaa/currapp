@@ -33,13 +33,16 @@ Route::group(['middleware' => 'auth'], function() {
 
 });
 
-Route::get('/amoclient/ready', function(){
-	return redirect('/educations');
-});
-
-Route::view('/login', 'login.production')->name('login');
-
-if(env('APP_ENV') == 'local')
+if(env('APP_ENV') == 'production')
+{
+	Route::get('/amoclient/ready', function(){
+		return redirect()->route('home');
+	});
+	Route::get('/login', function(){
+		return redirect('/amoclient/redirect');
+	})->name('login');
+}
+else
 {
 	Route::view('/login', 'login.local')->name('login');
 	Route::post('/login', function(){
@@ -48,10 +51,3 @@ if(env('APP_ENV') == 'local')
 		return redirect('home');
 	});
 }
-
-Route::view('/login_local', 'login.local')->name('login');
-	Route::post('/login', function(){
-		$user = \App\User::find(request('id'));
-		\Auth::login($user);
-		return redirect('home');
-	});
