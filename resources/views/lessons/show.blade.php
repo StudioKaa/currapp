@@ -11,6 +11,22 @@ Carbon::setLocale(config('app.locale')); ?>
     > {{ $lesson_type->title }}: {{ $lesson->title }}
 @endsection
 
+@section('breadcrumbs')
+    <ol class="my-breadcrumb navbar-text">
+        <li class="breadcrumb-item">
+            <a href="/educations/{{ $education->id }}">{{ $education->title }}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/cohorts/{{ $cohort->id }}">{{ $cohort->title }}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/terms/{{ $term->id }}">{{ $term->title }}</a>
+        </li>
+        <li class="breadcrumb-item">{{ $lesson_type->title }}</li>
+        <li class="breadcrumb-item">{{ $lesson->title }}</li>
+    </ol>
+@endsection
+
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/terms/{{ $term->id }}">
         <i class="fa fa-chevron-left" aria-hidden="true"></i> Overzicht

@@ -1,16 +1,24 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > <a class="navbar-text" href="/educations/{{ $education->id }}">{{ $education->title }}</a>
-    >
-    <select class="cohort-select" id="to-term">
-        @foreach($cohort->education->cohorts as $c)
-            <option value="{{ $c->id }}.{{ $term->title }}" <?php echo $c->id == $cohort->id ? 'selected' : '' ?>>
-                {{ $c->start_year }} - {{ $c->exam_year }}
-            </option>
-        @endforeach
-    </select>
-    > {{ $term->title }}
+@section('breadcrumbs')
+    <ol class="my-breadcrumb navbar-text">
+        <li class="breadcrumb-item">
+            <a href="/educations/{{ $education->id }}">{{ $education->title }}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/cohorts/{{ $cohort->id }}">{{ $cohort->title }}</a>
+            <!-- <select class="cohort-select" id="to-cohort">
+                @foreach($cohort->education->cohorts as $c)
+                    <option value="{{ $c->id }}" <?php echo $c->id == $cohort->id ? 'selected' : '' ?>>
+                        {{ $c->start_year }} - {{ $c->exam_year }}
+                    </option>
+                @endforeach
+            </select> -->
+        </li>
+        <li class="breadcrumb-item">
+            {{ $term->title }}
+        </li>
+    </ol>
 @endsection
 
 @section('buttons-right')

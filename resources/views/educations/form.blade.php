@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > {{ $education->exists ? 'Opleiding aanpassen' : 'Nieuwe opleiding' }}
-@endsection
-
 @section('buttons-right')
     <?php $href = $education->exists ? '/educations/' . $education->id : '/educations'; ?>
     <a class="btn btn-outline-secondary navbar-text" href="{{ $href }}">

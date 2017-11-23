@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > Les verwijderen
-@endsection
-
 @section('content')
   
   <h3>Weet je het zeker?</h3>

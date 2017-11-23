@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > <a class="navbar-text" href="/educations/{{ $education->id }}">{{ $education->title }}</a> > <a class="navbar-text" href="/terms/{{ $term->id }}">{{ $term->title }}</a> > Nieuwe lesvorm
-@endsection
-
 @section('content')
 
     <form method="post" action="/lesson_types">

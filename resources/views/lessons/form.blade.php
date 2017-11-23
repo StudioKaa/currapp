@@ -1,12 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > <a class="navbar-text" href="/educations/{{ $education->id }}">{{ $education->title }}</a>
-    > <a class="navbar-text" href="/cohorts/{{ $cohort->id }}">{{ $cohort->start_year }} - {{ $cohort->exam_year }}</a>
-    > <a class="navbar-text" href="/terms/{{ $term->id }}">{{ $term->title }}</a>
-    > {{ $lesson->exists ? 'Les aanpassen' : 'Nieuwe les' }}
-@endsection
-
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/lessons/{{ $lesson->id }}">
         <i class="fa fa-times" aria-hidden="true"></i> Annuleren

@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > {{ $education->title }}
+@section('breadcrumbs')
+    <ol class="my-breadcrumb navbar-text">
+        <li class="breadcrumb-item">
+            {{ $education->title }}
+        </li>
+    </ol>
 @endsection
 
 @section('buttons-right')
@@ -23,17 +27,5 @@
             </a>
         @endforeach
     </div>
-
-
-    <!-- <div class="card-deck">
-        @foreach ($cohorts as $cohort)
-            <div class="card">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h4 class="card-title">{{ $education->title }} {{ $cohort->start_year }} - {{ $cohort->exam_year }}</h4>
-                    <a class="btn btn-outline-primary" href="{{ url('cohorts', [$cohort->id]) }}">Bekijk {{ $cohort->start_year }} - {{ $cohort->exam_year }}</a>
-                </div>
-            </div>
-        @endforeach
-    </div> -->
     
 @endsection
