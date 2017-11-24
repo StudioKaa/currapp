@@ -7,7 +7,7 @@
             </h5>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            @if($review->tv_filename != null)
+            @if($review->tv_filename == null)
                 <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Trainersversie toevoegen)</a>
                 <span class="badge badge-danger">TV</span>
             @else
