@@ -8,6 +8,7 @@ use App\User;
 use App\Review_status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
@@ -149,9 +150,16 @@ class ReviewController extends Controller
             return redirect($review->sv_do_path);
         }
 
-        header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->sv_do_path));
-        header('Content-Disposition: attachment; filename="' . $review->sv_filename . '"');
-        return Storage::disk('spaces')->get($review->sv_do_path);
+        $time = Carbon::now()->addMinutes(1);
+        return redirect($this->temporaryUrl($time, $review->sv_do_path));
+    }
+
+    private function temporaryUrl($expires, $do_path)
+    {
+        $config = config('filesystems.disks')['spaces'];
+        $request = "GET\n\n\n{$expires->timestamp}\n/{$config['bucket']}/{$do_path}";
+        $signature = urlencode(base64_encode(hash_hmac('sha1', $request, $config['secret'], true)));
+        return "{$config['endpoint']}{$config['bucket']}/{$do_path}?AWSAccessKeyId={$config['key']}&Expires={$expires->timestamp}&Signature={$signature}";
     }
 
 
