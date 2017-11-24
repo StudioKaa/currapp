@@ -68,6 +68,8 @@
                 <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }}
                     @if(Auth::user()->type == 'teacher')
                         bg-{{ $lesson->status()->context_class }}
+                    @else
+                        bg-secondary
                     @endif
                     ">
                     <div class="card-body">
