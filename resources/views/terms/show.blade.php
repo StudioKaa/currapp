@@ -69,7 +69,7 @@
                     @if(Auth::user()->type == 'teacher')
                         bg-{{ $lesson->status()->context_class }}
                     @else
-                        bg-secondary
+                        bg-{{ $lesson->status()->context_class == 'success' ? 'success' : 'secondary' }}
                     @endif
                     ">
                     <div class="card-body">
