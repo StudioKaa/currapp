@@ -1,4 +1,4 @@
-<div class="card my-spacing border-{{ $review->status()->context_class }}">
+<div class="card border-{{ $review->status()->context_class }}">
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <h5 class="card-title d-flex justify-content-between align-items-center">
@@ -36,8 +36,6 @@
             @if($review->status()->title == 'Concept' || $review->status()->title == 'In-review')
                 <a href="/reviews/{{ $review->id }}/review" class="card-link btn btn-outline-primary"><i class="fa fa-eye"></i> Reviewen</a>
             @endif
-            <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-plus"></i> Bestand</a>
-            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> Wiki-link</a>
         </div>
     </div>
     <div class="card-footer text-muted">

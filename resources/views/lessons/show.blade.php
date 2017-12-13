@@ -36,39 +36,42 @@ Carbon::setLocale(config('app.locale')); ?>
     </a>
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="{{ URL::asset('css/lesson.css') }}">
+@endpush
+
 @section('content')
-
-    <div class="row my-spacing">
-        <div class="col-12">
-            <h3>{{ $lesson_type->title }}: {{ $lesson->title }}</h3>
-        </div>
-    </div>
-
-    <div class="row my-spacing">
-        <div class="col-6 d-flex flex-column">
-            @if(Auth::user()->type == 'teacher' && $review != null)
-                @include('reviews.partial_teacher')
-                <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
-                <div class="collapse" id="history-content">
-                    @foreach($history as $review)
-                        @include('reviews.partial_teacher')
-                    @endforeach
-                </div>
-            @elseif(Auth::user()->type == 'teacher' && $review == null)
-                <div class="btn-group review-buttons">
-                    <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary">Eerste versie uploaden</a>
-                    <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> Wiki-link</a>
-                </div>
-            @elseif(Auth::user()->type == 'student' && $review != null)
-                @include('reviews.partial_student')
-            @endif
-        </div>
-
-        <div class="col-6">
-            @if(count($files) || Auth::user()->type == 'teacher')
-                @include('files.partial_' . Auth::user()->type)
-            @endif
-        </div>
-    </div>
     
+<div class="lesson-container">
+
+    <h3>{{ $lesson_type->title }}: {{ $lesson->title }}</h3>
+
+    <div class="btn-group review-buttons">
+        @if(Auth::user()->type == 'teacher')
+            <span class="btn btn-outline-primary">{{ $review == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
+            <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> bestand</a>
+            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> wiki</a>
+            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> tekst</a>
+        @endif
+    </div>
+
+    <div class="reviews">
+        @if(Auth::user()->type == 'teacher' && $review != null)
+            @include('reviews.partial_teacher')
+            <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
+            <div class="collapse" id="history-content">
+                @foreach($history as $review)
+                    @include('reviews.partial_teacher')
+                @endforeach
+            </div>
+        @elseif(Auth::user()->type == 'student' && $review != null)
+            @include('reviews.partial_student')
+        @endif
+    </div>
+
+    @if(count($files) || Auth::user()->type == 'teacher')
+        @include('files.partial_' . Auth::user()->type)
+    @endif
+    
+</div>
 @endsection

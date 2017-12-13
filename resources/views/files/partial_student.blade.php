@@ -1,9 +1,15 @@
-<div class="card my-spacing">
-    <div class="card-body">
-        <h5 class="card-title">Losse bestanden:</h5>
-        <ul>
+<div class="files">
+    <div class="files card">
+        <div class="card-header border-bottom-0">
+            <h5 class="card-title">Losse bestandennnn</h5>
+        </div>
+        <ul class="list-group list-group-flush">
             @foreach($files as $file)
-                <li><a target="_blank" href="/files/{{ $file->id }}">{{ $file->title }}</a></li>
+                <li class="list-group-item">
+                    <a target="_blank" href="/files/{{ $file->id }}" >
+                        {{ $file->title }}
+                    </a>
+                </li>
             @endforeach
         </ul>
     </div>
