@@ -75,6 +75,7 @@ class ReviewController extends Controller
         $review->review_status_id = $review_status_id;
         $review->author_id = \Auth::user()->id;
         $review->reviewer_id = $reviewer_id; 
+        $review->type = Review::TYPE_FILE;
         $review->save();
 
         $this->save_files($request, $review);
@@ -123,7 +124,7 @@ class ReviewController extends Controller
 
     public function get_file_wv(Review $review)
     {
-        if($review->wiki)
+        if($review->type == Review::TYPE_WIKI)
         {
             return redirect($review->wv_do_path);
         }
@@ -134,7 +135,7 @@ class ReviewController extends Controller
     }
     public function get_file_tv(Review $review)
     {
-        if($review->wiki)
+        if($review->type == Review::TYPE_WIKI)
         {
             return redirect($review->tv_do_path);
         }
@@ -145,7 +146,7 @@ class ReviewController extends Controller
     }
     public function get_file_sv(Review $review)
     {
-        if($review->wiki)
+        if($review->type == Review::TYPE_WIKI)
         {
             return redirect($review->sv_do_path);
         }
@@ -266,7 +267,7 @@ class ReviewController extends Controller
         $review->lesson_id = request('lesson');
         $review->review_status_id = Review::STATUS_COMPLETE;
         $review->author_id = \Auth::user()->id;
-        $review->wiki = true;
+        $review->type = Review::TYPE_WIKI;
         $review->reviewer_id = null; 
         $review->wv_filename = 'Wiki: werkversie';
         $review->wv_do_path = $wiki_base . request('wiki');

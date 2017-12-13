@@ -14,6 +14,9 @@ class Review extends Model
     const STATUS_IN_REVIEW = 2;
     const STATUS_COMPLETE = 3;
 
+    const TYPE_FILE = 0;
+    const TYPE_WIKI = 1;
+    const TYPE_TEXT = 2;
 
     public function status()
     {
