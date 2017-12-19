@@ -1,7 +1,10 @@
 <h5>
     <span>Losse bestanden</span>
-    <a href="/files/create?lesson={{ $lesson->id }}" class="btn btn-outline-secondary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a href="/files/create?lesson={{ $lesson->id }}" class="btn btn-outline-secondary">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
 </h5>
+@if($files->isNotEmpty())
 <div class="files">
     <div class="files card">
         <ul class="list-group list-group-flush">
@@ -16,3 +19,4 @@
         </ul>
     </div>
 </div>
+@endif
