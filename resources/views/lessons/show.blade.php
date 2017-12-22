@@ -49,9 +49,9 @@ Carbon::setLocale(config('app.locale')); ?>
     <div class="btn-group review-buttons">
         @if(Auth::user()->type == 'teacher')
             <span class="btn btn-outline-primary">{{ $review == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
-            <a href="/reviews/create?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> bestand</a>
-            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> wiki</a>
-            <a href="/reviews/addwiki?lesson={{ $lesson->id }}" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> tekst</a>
+            <a href="/lessons/{{ $lesson->id }}/reviews/create/file" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> bestand</a>
+            <a href="/lessons/{{ $lesson->id }}/reviews/create/wiki" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> wiki</a>
+            <a href="/lessons/{{ $lesson->id }}/reviews/create/text" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> tekst</a>
         @endif
     </div>
 

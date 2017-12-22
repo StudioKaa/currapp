@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <form method="POST" action="/reviews/{{ $review->id }}" enctype="multipart/form-data">
+    <form method="POST" action="/reviews/{{ $review->id }}/addfiles" enctype="multipart/form-data">
       {{ method_field('PATCH') }}
 
     	@include('layouts/errors')

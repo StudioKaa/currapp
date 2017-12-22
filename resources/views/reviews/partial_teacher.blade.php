@@ -8,7 +8,7 @@
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
             @if($review->tv_filename == null)
-                <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Trainersversie toevoegen)</a>
+                <a class="ml-3" href="/reviews/{{ $review->id }}/addfiles">(Trainersversie toevoegen)</a>
                 <span class="badge badge-danger">TV</span>
             @else
                 <a class="ml-3" target="_blank" href="/reviews/{{ $review->id }}/tv">{{ $review->tv_filename }}</a>
@@ -17,7 +17,7 @@
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
             @if($review->sv_filename == null)
-                <a class="ml-3" href="/reviews/{{ $review->id }}/edit">(Studentversie toevoegen)</a>
+                <a class="ml-3" href="/reviews/{{ $review->id }}/addfiles">(Studentversie toevoegen)</a>
                 <span class="badge badge-danger">SV</span>
             @else
                 <a class="ml-3" target="_blank" href="/reviews/{{ $review->id }}/sv">{{ $review->sv_filename }}</a>

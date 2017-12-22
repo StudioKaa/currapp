@@ -8,7 +8,7 @@
 
 @section('content')
   
-    <form method="POST" action="/reviews" enctype="multipart/form-data">
+    <form method="POST" action="/lessons/{{ $lesson->id }}/reviews/create/file" enctype="multipart/form-data">
 
     	@include('layouts/errors')
 

@@ -9,15 +9,22 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::resource('terms', 'TermController', ['except' => ['index', 'show']]);
 		Route::resource('lesson_types', 'LessonTypeController', ['except' => ['index', 'show']]);
 		Route::resource('lessons', 'LessonController', ['except' => ['index', 'show']]);
-		Route::resource('reviews', 'ReviewController', ['except' => ['index', 'show']]);
-		Route::get('reviews/addwiki', 'ReviewController@addwiki');
-		Route::post('reviews/addwiki', 'ReviewController@savewiki');
-		Route::get('reviews/{review}/review', 'ReviewController@review');
-		Route::patch('/reviews/{review}/review', 'ReviewController@update_review');
+		Route::resource('files', 'FileController', ['except' => ['index', 'show', 'edit', 'update']]);
+		
+		Route::get('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@create_file');
+		Route::post('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@store_file');
+		Route::get('lessons/{lesson}/reviews/create/wiki', 'ReviewCreateController@create_wiki');
+		Route::post('lessons/{lesson}/reviews/create/wiki', 'ReviewCreateController@store_wiki');
+		Route::get('lessons/{lesson}/reviews/create/text', 'ReviewCreateController@create_text');
+		Route::post('lessons/{lesson}/reviews/create/text', 'ReviewCreateController@store_text');
+
+		Route::resource('reviews', 'ReviewController', ['only' => ['edit', 'update']]);
+		Route::get('reviews/{review}/addfiles', 'ReviewController@addfiles_form');
+		Route::patch('reviews/{review}/addfiles', 'ReviewController@addfiles_store');
+		Route::get('reviews/{review}/review', 'ReviewController@review_form');
+		Route::patch('/reviews/{review}/review', 'ReviewController@review_store');
 		Route::get('reviews/{review}/wv', 'ReviewController@get_file_wv');
 		Route::get('reviews/{review}/tv', 'ReviewController@get_file_tv');
-		Route::resource('files', 'FileController', ['except' => ['index', 'show', 'edit', 'update']]);
-
 	});
 
 	Route::redirect('/', '/educations', 301);
