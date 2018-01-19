@@ -8,7 +8,7 @@
 
 @section('content')
   
-    <form method="POST" action="/reviews/addwiki" enctype="multipart/form-data">
+    <form method="POST" action="/lessons/{{ $lesson->id }}/reviews/create/text">
 
     	@include('layouts/errors')
 
@@ -38,18 +38,15 @@
 	    	</div>
   		</div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Ontwikkelaar</label>
+        <label class="col-sm-2 col-form-label">Auteur</label>
         <div class="col-sm-10">
           <input type="text" readonly class="form-control-plaintext" value="{{ $review->author->name }}">
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Link naar wiki:</label>
+        <label class="col-sm-2 col-form-label">Bericht (alleen zichtbaar voor docenten):</label>
         <div class="col-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon">https://wiki.amo.rocks/wiki/</span>
-            <input type="text" class="form-control" name="wiki">
-          </div>
+          <textarea name="message" id="" rows="10"></textarea>
         </div>
       </div>
 

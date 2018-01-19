@@ -126,4 +126,42 @@ class ReviewCreateController extends Controller
         
         return redirect('/lessons/' . request('lesson'));
     }
+
+    public function create_text(Lesson $lesson)
+    {
+        $review = new Review();
+        $review->author = \Auth::user();
+
+        return view('reviews.create_text')
+            ->with('education', $lesson->lesson_type->term->cohort->education)
+            ->with('cohort', $lesson->lesson_type->term->cohort)
+            ->with('term', $lesson->lesson_type->term)
+            ->with('lesson_type', $lesson->lesson_type)
+            ->with('lesson', $lesson)
+            ->with('review', $review)
+            ->with('users', User::where('type', 'teacher')->get());
+    }
+
+    public function store_text(Request $request)
+    {
+        $this->validate(request(), [
+
+            'lesson' => 'required|integer',
+            'message' => 'required|string'
+
+        ]);
+
+        $review = new Review();
+        $review->lesson_id = request('lesson');
+        $review->review_status_id = Review::STATUS_COMPLETE;
+        $review->author_id = \Auth::user()->id;
+        $review->type = Review::TYPE_TEXT;
+        $review->comment = $request->message;
+        $review->sv_filename = 'type_of_text';
+        $review->sv_do_path = 'type_of_text';
+
+        $review->save();
+        
+        return redirect('/lessons/' . request('lesson'));
+    }
 }

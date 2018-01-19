@@ -83,8 +83,6 @@ class LessonController extends Controller
                 ->first();
         }
 
-        //dd( empty($lesson->files));
-
         return view('lessons.show')
             ->with('education', $lesson->lesson_type->term->cohort->education)
             ->with('cohort', $lesson->lesson_type->term->cohort)

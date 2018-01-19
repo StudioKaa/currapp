@@ -8,7 +8,7 @@
 
 @section('content')
   
-    <form method="POST" action="/lessons/{{ $lesson->id }}/reviews/create/wiki" enctype="multipart/form-data">
+    <form method="POST" action="/lessons/{{ $lesson->id }}/reviews/create/wiki">
 
     	@include('layouts/errors')
 
