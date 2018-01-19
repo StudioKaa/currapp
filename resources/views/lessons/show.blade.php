@@ -56,22 +56,22 @@ Carbon::setLocale(config('app.locale')); ?>
     </div>
 
     <div class="reviews">
-        @if($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'teacher')
-            <pre>{{ $review->comment }}</pre>
-        @elseif($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'student')
+        @if($review == null || ($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'student'))
             <p><em>Voor deze les is geen reader beschikbaar.</em></p>
-        @elseif(Auth::user()->type == 'teacher' && $review != null)
-            @include('reviews.partial_teacher')
-            <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
-            <div class="collapse" id="history-content">
-                @foreach($history as $review)
-                    @include('reviews.partial_teacher')
-                @endforeach
-            </div>
-        @elseif(Auth::user()->type == 'student' && $review != null)
-            @include('reviews.partial_student')
         @else
-            <p><em>Voor deze les is geen reader beschikbaar.</em></p>
+            @if($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'teacher')
+                <pre>{{ $review->comment }}</pre>
+            @elseif(Auth::user()->type == 'teacher')
+                @include('reviews.partial_teacher')
+                <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
+                <div class="collapse" id="history-content">
+                    @foreach($history as $review)
+                        @include('reviews.partial_teacher')
+                    @endforeach
+                </div>
+            @elseif(Auth::user()->type == 'student')
+                @include('reviews.partial_student')
+            @endif
         @endif
     </div>
 
