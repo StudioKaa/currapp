@@ -10,7 +10,9 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::resource('lesson_types', 'LessonTypeController', ['except' => ['index', 'show']]);
 		Route::resource('lessons', 'LessonController', ['except' => ['index', 'show']]);
 		Route::resource('files', 'FileController', ['except' => ['index', 'show', 'edit', 'update']]);
-		
+		Route::resource('links', 'LinkController', ['except' => ['index', 'show', 'edit','update']]);
+
+
 		Route::get('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@create_file');
 		Route::post('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@store_file');
 		Route::get('lessons/{lesson}/reviews/create/wiki', 'ReviewCreateController@create_wiki');
@@ -38,6 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/lessons/{lesson}', 'LessonController@show');
 	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
 	Route::get('/files/{file}', 'FileController@show');
+	Route::get('/links/{link}', 'LinkController@show');
 
 });
 
