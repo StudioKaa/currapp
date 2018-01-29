@@ -22,9 +22,8 @@ class ReviewController extends Controller
             return redirect($review->wv_do_path);
         }
 
-        header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->wv_do_path));
-        header('Content-Disposition: attachment; filename="' . $review->wv_filename . '"');
-        return Storage::disk('spaces')->get($review->wv_do_path);
+        $time = Carbon::now()->addMinutes(10);
+        return redirect($this->temporaryUrl($time, $review->wv_do_path));
     }
     public function get_file_tv(Review $review)
     {
@@ -33,9 +32,8 @@ class ReviewController extends Controller
             return redirect($review->tv_do_path);
         }
 
-        header('Content-Type: ' . Storage::disk('spaces')->getMimeType($review->tv_do_path));
-        header('Content-Disposition: attachment; filename="' . $review->tv_filename . '"');
-        return Storage::disk('spaces')->get($review->tv_do_path);
+        $time = Carbon::now()->addMinutes(10);
+        return redirect($this->temporaryUrl($time, $review->sv_to_path));
     }
     public function get_file_sv(Review $review)
     {
