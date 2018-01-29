@@ -35,3 +35,12 @@
 .files-container, .links-container {
 	margin-bottom: 30px;
 }
+
+.review-buttons {
+	align-items: flex-start;
+}
+
+.link-item {
+	display: flex;
+	justify-content: space-between;
+}

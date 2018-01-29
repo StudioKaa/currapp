@@ -170,3 +170,7 @@ label.btn{
 .dropdown-menu-left{
 	left: -100px;
 }
+
+.review-buttons {
+	align-items: flex-start;
+}
