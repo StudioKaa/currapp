@@ -33,9 +33,6 @@
                     @if(Auth::user()->type == 'teacher')
                         @yield('buttons-right')
                     @endif
-                    <span class="btn btn-outline-secondary navbar-text">
-                        <i class="fa fa-fw fa-user"></i>&nbsp;{{ Auth::user()->name }}
-                    </span>
                     <a class="btn btn-outline-secondary navbar-text" href="/amoclient/logout">
                         <i class="fa fa-fw fa-sign-out"></i>
                     </a>
