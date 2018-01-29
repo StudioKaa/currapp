@@ -9,7 +9,7 @@ class Link extends Model
 
     public function lesson()
     {
-        return $this->belongsTo(\App\Lesson::class);
+        return $this->belongsTo(Lesson::class);
     }
 
 }

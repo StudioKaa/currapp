@@ -75,7 +75,7 @@ Carbon::setLocale(config('app.locale')); ?>
         @endif
     </div>
 
-    @if(count($files) || Auth::user()->type == 'teacher')
+    @if(count($lesson->files) || Auth::user()->type == 'teacher')
         @include('files.partial_' . Auth::user()->type)
     @endif
     @if(count($lesson->links) || Auth::user()->type == 'teacher')

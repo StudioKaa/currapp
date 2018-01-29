@@ -47,7 +47,7 @@
 			<div class="form-group row">
         <label class="col-sm-2 col-form-label">URL <i class="fa fa-link"></i></label>
         <div class="col-sm-10">
-          <input type="text" class="form-control-file" name="link">
+          <input type="text" class="form-control" name="link">
         </div>
 			</div>
 

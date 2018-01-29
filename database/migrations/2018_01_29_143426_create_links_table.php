@@ -18,12 +18,12 @@ class CreateLinksTable extends Migration
             $table->integer('lesson_id')->unsigned();
             $table->string('link');
             $table->string('title');
-            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('lesson_id')
-            ->references('id')->on('lessons')
-            ->onDelete('cascade');
+                ->references('id')->on('lessons')
+                ->onDelete('cascade');
+
         });
 
 
