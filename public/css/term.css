@@ -59,12 +59,12 @@
 	border-bottom-width: 0px;
 }
 .card-body{
-	padding: 10px 15px;
+	padding: 10px;
 	display: flex;
-	align-items: center;
 }
 .card-title{
 	margin-bottom: 0 !important;
+	font-size: .9rem;
 }
 
 .term-grid .start-1{ grid-row-start: 2; }
