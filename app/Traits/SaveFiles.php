@@ -6,10 +6,8 @@ trait SaveFiles{
 
 	public function save_files($request, $review)
     {
-        //build general filename
-        $filename = date('Ymd');
-        
-        $filename .= 'Reader_' . $review->lesson->lesson_type->term->title;
+        //build general filename        
+        $filename = $review->lesson->lesson_type->term->title;
         $filename .= '_' . $review->lesson->lesson_type->title;
         $filename .= '_wk' . $review->lesson->week_start;
         $filename .= '_' . $review->lesson->getFileName();
