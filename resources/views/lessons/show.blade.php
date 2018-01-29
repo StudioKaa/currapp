@@ -1,4 +1,4 @@
-<?php 
+<?php
 use Carbon\Carbon;
 Carbon::setLocale(config('app.locale')); ?>
 
@@ -41,7 +41,7 @@ Carbon::setLocale(config('app.locale')); ?>
 @endpush
 
 @section('content')
-    
+
 <div class="lesson-container">
 
     <h3>{{ $lesson_type->title }}: {{ $lesson->title }}</h3>
@@ -78,6 +78,6 @@ Carbon::setLocale(config('app.locale')); ?>
     @if(count($files) || Auth::user()->type == 'teacher')
         @include('files.partial_' . Auth::user()->type)
     @endif
-    
+
 </div>
 @endsection
