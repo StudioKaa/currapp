@@ -1,3 +1,4 @@
+<div class="files-container">
 <h5>
     <span>Losse bestanden</span>
     <a href="/files/create?lesson={{ $lesson->id }}" class="btn btn-outline-secondary">
@@ -20,3 +21,5 @@
     </div>
 </div>
 @endif
+
+</div>
