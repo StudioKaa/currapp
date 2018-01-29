@@ -7,7 +7,7 @@ use App\Review_status;
 
 class Lesson extends Model
 {
-
+    
 	public function lesson_type()
 	{
 		return $this->belongsTo(Lesson_type::class);
@@ -16,11 +16,6 @@ class Lesson extends Model
 	public function files()
 	{
 		return $this->hasMany(File::class);
-	}
-
-	public function links()
-	{
-		return $this->hasMany(Link::class);
 	}
 
 	public function reviews()
