@@ -40,7 +40,7 @@
             </div>
         </nav>
 
-        <div class="container main">
+        <div class="container-fluid main">
             @yield('content')
         </div>
         <footer class="container">
