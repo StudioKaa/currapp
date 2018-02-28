@@ -17,6 +17,7 @@ class CreateAssetsTable extends Migration
             
             $table->increments('id');
             $table->integer('lesson_id')->unsigned();
+            $table->string('author_id');
             $table->string('title');
             $table->string('link');
             $table->string('visibility')->default('teacher');

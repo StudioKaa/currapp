@@ -2,31 +2,20 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 1em 2em;
-	grid-auto-flow: column;
 }
 
-.lesson-container > h3, .lesson-container > h5{
-	margin: 0;
-	display: flex;
-	align-items: flex-end;
-}
-
-.lesson-container > h5{
-	font-weight: normal;
-}
-
-.lesson-container > .reviews{
-	grid-row: 3;
+.lesson-container h3, .review-buttons, .reviews{
 	grid-column: 1;
 }
 
-/*.lesson-container > h5{
-	grid-row: 2;
+.asset-buttons, .assets{
 	grid-column: 2;
-	justify-content: space-between;
-}*/
+}
 
-.lesson-container > .assets{
-	grid-row: 3;
-	grid-column: 2;
+.asset-buttons{
+	grid-row: 2;
+}
+
+.lesson-container small{
+	font-style: italic;
 }

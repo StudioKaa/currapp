@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Review_status;
+use Auth;
 
 class Lesson extends Model
 {
@@ -15,7 +16,13 @@ class Lesson extends Model
 
 	public function assets()
 	{
-		return $this->hasMany(Asset::class);
+		$assets = $this->hasMany(Asset::class);
+		if(Auth::user()->type == 'student')
+		{
+			$assets = $assets->where('visibility', 'student');
+		}
+
+		return $assets;
 	}
 
 	public function reviews()
