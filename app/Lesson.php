@@ -13,9 +13,9 @@ class Lesson extends Model
 		return $this->belongsTo(Lesson_type::class);
 	}
 
-	public function files()
+	public function assets()
 	{
-		return $this->hasMany(File::class);
+		return $this->hasMany(Asset::class);
 	}
 
 	public function reviews()

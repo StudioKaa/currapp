@@ -8,7 +8,11 @@
 .lesson-container > h3, .lesson-container > h5{
 	margin: 0;
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
+}
+
+.lesson-container > h5{
+	font-weight: normal;
 }
 
 .lesson-container > .reviews{
@@ -16,13 +20,13 @@
 	grid-column: 1;
 }
 
-.lesson-container > h5{
+/*.lesson-container > h5{
 	grid-row: 2;
 	grid-column: 2;
 	justify-content: space-between;
-}
+}*/
 
-.lesson-container > .files{
+.lesson-container > .assets{
 	grid-row: 3;
 	grid-column: 2;
 }
