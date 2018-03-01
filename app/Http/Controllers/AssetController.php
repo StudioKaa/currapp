@@ -80,6 +80,11 @@ class AssetController extends Controller
 
     public function destroy(Lesson $lesson, Asset $asset)
     {
+        if($asset->type == 'file')
+        {
+            Storage::disk('spaces')->delete($asset->link); 
+        }
+        
         $asset->delete();
         return redirect()->route('lessons.show', $lesson);
     }
