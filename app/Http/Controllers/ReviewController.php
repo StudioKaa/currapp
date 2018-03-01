@@ -34,7 +34,7 @@ class ReviewController extends Controller
         }
 
         $time = Carbon::now()->addMinutes(10);
-        return redirect($this->temporaryUrl($time, $review->sv_do_path));
+        return redirect($this->temporaryUrl($time, $review->tv_do_path));
     }
     public function get_file_sv(Review $review)
     {
