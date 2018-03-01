@@ -47,12 +47,30 @@ class AssetController extends Controller
 
     public function create_link(Lesson $lesson)
     {
-        return view('assets.create')->with('lesson', $lesson);
+        return view('assets.create_link')->with('lesson', $lesson);
     }
 
     public function store_link(Request $request)
     {
-        //
+        $this->validate(request(), [
+
+            'lesson' => 'required|integer',
+            'title' => 'required',
+            'link' => 'required|url',
+            'visibility' => 'required|in:student,teacher'
+
+        ]);
+
+        $asset = new Asset();
+        $asset->lesson_id = request('lesson');
+        $asset->author_id = Auth::user()->id;
+        $asset->type = 'link';
+        $asset->title = request('title');
+        $asset->visibility = request('visibility');
+        $asset->link = request('link');
+        
+        $asset->save();
+        return redirect('/lessons/' . request('lesson'));
     }
 
     public function delete(Asset $asset)
