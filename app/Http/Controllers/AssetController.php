@@ -29,6 +29,7 @@ class AssetController extends Controller
         $asset = new Asset();
         $asset->lesson_id = request('lesson');
         $asset->author_id = Auth::user()->id;
+        $asset->type = 'file';
         $asset->title = request()->file->getClientOriginalName();
         $asset->visibility = request('visibility');
 
@@ -52,16 +53,6 @@ class AssetController extends Controller
     public function store_link(Request $request)
     {
         //
-    }
-
-    public function show(Lesson $lesson, Asset $asset)
-    {
-        if($asset->visibility == 'teacher' && Auth::user()->type != 'teacher')
-        {
-            dd('Geen toegang.');
-        }
-
-        return redirect($asset->link);
     }
 
     public function delete(Asset $asset)
