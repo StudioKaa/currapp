@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/terms/find/{id}', 'TermController@find');
 	Route::get('/lessons/{lesson}', 'LessonController@show');
 	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
-	Route::get('lessons/{lesson}/assets/{asset}', 'AssetController@show');
+	Route::get('lessons/{lesson}/assets/{asset}', 'AssetController@show')->name('lessons.assets.show');
 
 });
 
