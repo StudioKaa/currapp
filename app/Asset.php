@@ -16,6 +16,11 @@ class Asset extends Model
         return User::find($this->author_id);
     }
 
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class);
+    }
+
     public function getLinkAttribute($value)
     {
     	if($this->type == 'file')

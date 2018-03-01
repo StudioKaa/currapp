@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/cohorts/{cohort}', 'CohortController@show');
 	Route::get('/terms/{term}', 'TermController@show');
 	Route::get('/terms/find/{id}', 'TermController@find');
-	Route::get('/lessons/{lesson}', 'LessonController@show');
+	Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
 	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
 });
 

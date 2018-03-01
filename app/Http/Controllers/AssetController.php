@@ -73,13 +73,14 @@ class AssetController extends Controller
         return redirect('/lessons/' . request('lesson'));
     }
 
-    public function delete(Asset $asset)
+    public function delete(Lesson $lesson, Asset $asset)
     {
-        //
+        return view('assets.delete')->with('asset', $asset);
     }
 
-    public function destroy(Asset $asset)
+    public function destroy(Lesson $lesson, Asset $asset)
     {
-        //
+        $asset->delete();
+        return redirect()->route('lessons.show', $lesson);
     }
 }
