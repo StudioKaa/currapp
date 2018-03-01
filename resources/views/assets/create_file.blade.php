@@ -8,32 +8,32 @@
 
 @section('content')
   
-    <form method="POST" action="/files" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('lessons.assets.store.file', $lesson) }}" enctype="multipart/form-data">
 
     	@include('layouts/errors')
 
 	  	<div class="form-group row">
 		    <label class="col-sm-2 col-form-label">Opleiding</label>
   		  <div class="col-sm-10">
-  				<input type="text" readonly class="form-control-plaintext" value="{{ $education->title }}">
+  				<input type="text" readonly class="form-control-plaintext" value="{{ $lesson->lesson_type->term->cohort->education->title }}">
   			</div>
 	  	</div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Cohort</label>
         <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" value="{{ $cohort->start_year }} - {{ $cohort->exam_year }}">
+          <input type="text" readonly class="form-control-plaintext" value="{{ $lesson->lesson_type->term->cohort->start_year }} - {{ $lesson->lesson_type->term->cohort->exam_year }}">
         </div>
       </div>
 	  	<div class="form-group row">
     		<label class="col-sm-2 col-form-label">Periode</label>
     		<div class="col-sm-10">
-	    		<input type="text" readonly class="form-control-plaintext" value="{{ $term->title }}">
+	    		<input type="text" readonly class="form-control-plaintext" value="{{ $lesson->lesson_type->term->title }}">
 	    	</div>
   		</div>
 	  	<div class="form-group row">
     		<label class="col-sm-2 col-form-label">Les</label>
     		<div class="col-sm-10">
-	    		<input type="text" readonly class="form-control-plaintext" value="{{ $lesson_type->title }}: {{ $lesson->title }}">
+	    		<input type="text" readonly class="form-control-plaintext" value="{{ $lesson->lesson_type->title }}: {{ $lesson->title }}">
 	    		<input type="hidden" name="lesson" value="{{ $lesson->id }}">
 	    	</div>
   		</div>
@@ -41,6 +41,13 @@
         <label class="col-sm-2 col-form-label">Bestand:</label>
         <div class="col-sm-10">
           <input type="file" class="form-control-file" name="file">
+        </div>
+      </div>
+      <div class="form-group row">
+        <span class="col-sm-2 col-form-label">Zichtbaarheid:</span>
+        <div class="col-sm-10">
+          <input type="radio" name="visibility" value="student" checked id="vis-stud"><label for="vis-stud">Iedereen</label>
+          <input type="radio" name="visibility" value="teacher" id="vis-teach"><label for="vis-teach">Docenten</label>
         </div>
       </div>
 

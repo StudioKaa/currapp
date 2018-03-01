@@ -7,13 +7,14 @@ use App\Lesson;
 use App\User;
 use App\Review_status;
 use App\Traits\SaveFiles;
+use App\Traits\GetTemporaryUrl;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
     
-    use SaveFiles;
+    use SaveFiles, GetTemporaryUrl;
 
     public function get_file_wv(Review $review)
     {
@@ -45,15 +46,6 @@ class ReviewController extends Controller
         $time = Carbon::now()->addMinutes(1);
         return redirect($this->temporaryUrl($time, $review->sv_do_path));
     }
-
-    private function temporaryUrl($expires, $do_path)
-    {
-        $config = config('filesystems.disks')['spaces'];
-        $request = "GET\n\n\n{$expires->timestamp}\n/{$config['bucket']}/{$do_path}";
-        $signature = urlencode(base64_encode(hash_hmac('sha1', $request, $config['secret'], true)));
-        return "{$config['endpoint']}{$config['bucket']}/{$do_path}?AWSAccessKeyId={$config['key']}&Expires={$expires->timestamp}&Signature={$signature}";
-    }
-
 
     public function review_form(Review $review)
     {

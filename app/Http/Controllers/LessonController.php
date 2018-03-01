@@ -90,8 +90,7 @@ class LessonController extends Controller
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
             ->with('review', $review)
-            ->with('history', $history)
-            ->with('files', $lesson->files);
+            ->with('history', $history);
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,21 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
+            
             $table->increments('id');
             $table->integer('lesson_id')->unsigned();
+            $table->string('author_id');
+            $table->string('type')->default('link'); //one of: file, link
             $table->string('title');
             $table->string('link');
+            $table->string('visibility')->default('teacher'); //one of: student, teacher
             $table->timestamps();
 
             $table->foreign('lesson_id')
                     ->references('id')->on('lessons')
                     ->onDelete('cascade');
+
         });
     }
 
@@ -33,6 +38,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('assets');
     }
 }

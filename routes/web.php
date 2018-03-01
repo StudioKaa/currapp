@@ -9,7 +9,12 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::resource('terms', 'TermController', ['except' => ['index', 'show']]);
 		Route::resource('lesson_types', 'LessonTypeController', ['except' => ['index', 'show']]);
 		Route::resource('lessons', 'LessonController', ['except' => ['index', 'show']]);
-		Route::resource('files', 'FileController', ['except' => ['index', 'show', 'edit', 'update']]);
+		
+		Route::resource('lessons.assets', 'AssetController', ['only' => ['delete', 'destroy']]);
+		Route::get('lessons/{lesson}/assets/create/file', 'AssetController@create_file')->name('lessons.assets.create.file');
+		Route::post('lessons/{lesson}/assets/create/file', 'AssetController@store_file')->name('lessons.assets.store.file');;
+		Route::get('lessons/{lesson}/assets/create/link', 'AssetController@create_link')->name('lessons.assets.create.link');;
+		Route::post('lessons/{lesson}/assets/create/link', 'AssetController@store_link')->name('lessons.assets.store.link');;
 		
 		Route::get('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@create_file');
 		Route::post('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@store_file');
@@ -35,10 +40,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/cohorts/{cohort}', 'CohortController@show');
 	Route::get('/terms/{term}', 'TermController@show');
 	Route::get('/terms/find/{id}', 'TermController@find');
-	Route::get('/lessons/{lesson}', 'LessonController@show');
+	Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
 	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
-	Route::get('/files/{file}', 'FileController@show');
-
 });
 
 if(env('APP_ENV') == 'production')
