@@ -104,6 +104,13 @@ a.link-card{
     color: inherit;
 }
 
+@media screen and (max-width: 850px)
+{
+	.my-breadcrumb{
+		display: none;
+	}
+}
+
 /* -- various -- */
 textarea{
 	width: 100%;
