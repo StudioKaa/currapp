@@ -115,3 +115,10 @@ a.link-card{
 textarea{
 	width: 100%;
 }
+
+@media screen and (max-width: 650px)
+{
+	.navbar .btn span{
+		display: none;
+	}
+}

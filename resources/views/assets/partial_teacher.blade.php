@@ -1,7 +1,7 @@
 <div class="btn-group asset-buttons">
     <span class="btn btn-outline-secondary">Nieuw:</span>
-    <a class="btn btn-outline-secondary" href="{{ route('lessons.assets.create.file', $lesson->id) }}" class="btn"><i class="fa fa-file-text-o"></i> bestand</a>
-    <a class="btn btn-outline-secondary" href="{{ route('lessons.assets.create.link', $lesson->id) }}" class="btn"><i class="fa fa-link"></i> link</a>
+    <a class="btn btn-outline-secondary" href="{{ route('lessons.assets.create.file', $lesson->id) }}" class="btn"><i class="fa fa-file-text-o"></i> <span>bestand</span></a>
+    <a class="btn btn-outline-secondary" href="{{ route('lessons.assets.create.link', $lesson->id) }}" class="btn"><i class="fa fa-link"></i> <span>link</span></a>
 </div>
 
 @if($lesson->assets->isNotEmpty())

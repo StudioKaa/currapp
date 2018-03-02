@@ -2,7 +2,7 @@
 
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/educations/create">
-        <i class="fa fa-plus" aria-hidden="true"></i> Opleiding
+        <i class="fa fa-plus" aria-hidden="true"></i> <span>Opleiding</span>
     </a>
 @endsection
 

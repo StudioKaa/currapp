@@ -23,16 +23,16 @@
 
 @section('buttons-student')
     <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i> Terug
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> <span>Terug</span>
     </a>
 @endsection
 
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/lesson_types/create?term={{ $term->id }}">
-        <i class="fa fa-plus" aria-hidden="true"></i> Lesvorm
+        <i class="fa fa-plus" aria-hidden="true"></i> <span>Lesvorm</span>
     </a>
     <a class="btn btn-outline-secondary navbar-text" href="/terms/{{ $term->id }}/edit">
-        <i class="fa fa-pencil" aria-hidden="true"></i> {{ $term->title }}
+        <i class="fa fa-pencil" aria-hidden="true"></i> <span>{{ $term->title }}</span>
     </a>
 @endsection
 

@@ -2,6 +2,11 @@
 	font-style: italic;
 }
 
+.lesson-container > *{
+	overflow: hidden;
+	max-width: calc(100vw - 30px);
+}
+
 .reviews, .assets{
 	margin: .5em 0;
 }
@@ -60,4 +65,11 @@
 		grid-row: 2;
 	}
 
+}
+
+@media screen and (max-width: 650px)
+{
+	.btn-group .btn span{
+		display: none;
+	}
 }

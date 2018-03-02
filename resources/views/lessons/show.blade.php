@@ -4,13 +4,6 @@ Carbon::setLocale(config('app.locale')); ?>
 
 @extends('layouts.app')
 
-@section('page-title')
-    > <a class="navbar-text" href="/educations/{{ $education->title }}/now">{{ $education->title }}</a>
-    > <a class="navbar-text" href="/cohorts/{{ $cohort->id }}">{{ $cohort->start_year }} - {{ $cohort->exam_year }}</a>
-    > <a class="navbar-text" href="/terms/{{ $term->id }}">{{ $term->title }}</a>
-    > {{ $lesson_type->title }}: {{ $lesson->title }}
-@endsection
-
 @section('breadcrumbs')
     <ol class="my-breadcrumb navbar-text">
         <li class="breadcrumb-item">
@@ -29,10 +22,10 @@ Carbon::setLocale(config('app.locale')); ?>
 
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/terms/{{ $term->id }}">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i> Overzicht
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> <span>Overzicht</span>
     </a>
     <a class="btn btn-outline-secondary navbar-text" href="/lessons/{{ $lesson->id }}/edit">
-        <i class="fa fa-pencil" aria-hidden="true"></i> {{ $lesson->title }}
+        <i class="fa fa-pencil" aria-hidden="true"></i> <span>{{ $lesson->title }}</span>
     </a>
 @endsection
 
@@ -49,9 +42,9 @@ Carbon::setLocale(config('app.locale')); ?>
     @if(Auth::user()->type == 'teacher')
         <div class="btn-group review-buttons">
             <span class="btn btn-outline-primary">{{ $review == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
-            <a href="/lessons/{{ $lesson->id }}/reviews/create/file" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> bestand</a>
-            <a href="/lessons/{{ $lesson->id }}/reviews/create/wiki" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> wiki</a>
-            <a href="/lessons/{{ $lesson->id }}/reviews/create/text" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> tekst</a>
+            <a href="/lessons/{{ $lesson->id }}/reviews/create/file" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> <span>bestand</span></a>
+            <a href="/lessons/{{ $lesson->id }}/reviews/create/wiki" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> <span>wiki</span></a>
+            <a href="/lessons/{{ $lesson->id }}/reviews/create/text" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> <span>tekst</span></a>
         </div>
     @endif
 

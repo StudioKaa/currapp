@@ -10,10 +10,10 @@
 
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/cohorts/create?education={{ $education->id }}">
-        <i class="fa fa-plus" aria-hidden="true"></i> Cohort
+        <i class="fa fa-plus" aria-hidden="true"></i> <span>Cohort</span>
     </a>
     <a class="btn btn-outline-secondary navbar-text" href="/educations/{{ $education->id }}/edit">
-        <i class="fa fa-pencil" aria-hidden="true"></i> {{ $education->title }}
+        <i class="fa fa-pencil" aria-hidden="true"></i> <span>{{ $education->title }}</span>
     </a>
 @endsection
 
