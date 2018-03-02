@@ -46,14 +46,14 @@ Carbon::setLocale(config('app.locale')); ?>
 
     <h3>{{ $lesson_type->title }}: {{ $lesson->title }}</h3>
 
-    <div class="btn-group review-buttons">
-        @if(Auth::user()->type == 'teacher')
+    @if(Auth::user()->type == 'teacher')
+        <div class="btn-group review-buttons">
             <span class="btn btn-outline-primary">{{ $review == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
             <a href="/lessons/{{ $lesson->id }}/reviews/create/file" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> bestand</a>
             <a href="/lessons/{{ $lesson->id }}/reviews/create/wiki" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> wiki</a>
             <a href="/lessons/{{ $lesson->id }}/reviews/create/text" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> tekst</a>
-        @endif
-    </div>
+        </div>
+    @endif
 
     <div class="reviews">
         @if($review == null || ($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'student'))

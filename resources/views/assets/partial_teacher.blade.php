@@ -6,7 +6,7 @@
 
 @if($lesson->assets->isNotEmpty())
 <div class="assets">
-    <div class="assets card">
+    <div class="card">
         <ul class="list-group list-group-flush">
             @foreach($lesson->assets as $asset)
                 <li class="list-group-item">
