@@ -13,7 +13,9 @@
                     <a target="_blank" href="{{ $asset->link }}">{{ $asset->title }}</a>
                     <small class="text-muted">- {{ $asset->created_at->diffForHumans() }} door {{ $asset->author()->name }}</small>
                     @if($asset->visibility == 'student')
-                        <span class="badge badge-secondary">SV</span>
+                        <span class="badge badge-primary">SV</span>
+                    @else
+                        <span class="badge badge-secondary">TV</span>
                     @endif
                     <a href="{{ route('lessons.assets.delete', [$lesson, $asset]) }}" class="pull-right"><i class="fa fa-trash"></i></a>
                 </li>
