@@ -40,18 +40,6 @@ class Lesson extends Model
 			return $status;
 		}
 
-		if(Auth::user()->type == 'teacher')
-        {
-            return $this->reviews->first()->status();
-        }
-        else
-        {
-            return $this->reviews()
-                ->where('review_status_id', Review::STATUS_COMPLETE)
-                ->where('sv_do_path', '<>', null)
-                ->first()->status();
-        }
-
 		return $this->reviews->first()->status();
 	}
 
