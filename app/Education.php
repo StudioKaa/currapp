@@ -10,8 +10,6 @@ class Education extends Model
 
     public function cohorts()
     {
-
     	return $this->hasMany(Cohort::class)->orderBy('start_year');
-
     }
 }
