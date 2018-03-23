@@ -30,6 +30,14 @@ class Lesson extends Model
 		return $this->hasMany(Review::class)->orderBy('created_at', 'desc');
 	}
 
+	public function has_reader_for_student()
+	{
+		return ($this->reviews()
+                ->where('review_status_id', Review_status::COMPLETE)
+                ->where('sv_do_path', '<>', null)
+                ->first() != null) ? true : false;
+	}
+
 	public function current_review()
 	{
 		if(Auth::user()->type == 'student')

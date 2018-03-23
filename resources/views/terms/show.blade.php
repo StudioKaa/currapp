@@ -65,7 +65,11 @@
             </div>
             
             @foreach($lesson_type->lessons()->get() as $lesson) 
-                <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }} bg-{{ $lesson->status()->context_class }}">
+                <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }} bg-{{ $lesson->status()->context_class }}
+                    @if($lesson->status()->is(\App\Review_status::CONCEPT) && $lesson->has_reader_for_student())
+                        bg-gradient
+                    @endif
+                    ">
                     <div class="card-body">
                         <p class="card-title"><a href="/lessons/{{ $lesson->id }}">{{ $lesson->title }}</a></p>
                     </div>
