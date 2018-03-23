@@ -65,13 +65,7 @@
             </div>
             
             @foreach($lesson_type->lessons()->get() as $lesson) 
-                <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }}
-                    @if(Auth::user()->type == 'teacher')
-                        bg-{{ $lesson->status()->context_class }}
-                    @else
-                        bg-{{ $lesson->status()->context_class == 'success' ? 'success' : 'secondary' }}
-                    @endif
-                    ">
+                <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }} bg-{{ $lesson->status()->context_class }}">
                     <div class="card-body">
                         <p class="card-title"><a href="/lessons/{{ $lesson->id }}">{{ $lesson->title }}</a></p>
                     </div>

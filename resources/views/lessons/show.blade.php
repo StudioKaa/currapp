@@ -49,12 +49,16 @@ Carbon::setLocale(config('app.locale')); ?>
     @endif
 
     <div class="reviews">
-        @if($review == null || ($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'student'))
-            <p><em>Voor deze les is geen reader beschikbaar.</em></p>
-        @else
-            @if($review->type == \App\Review::TYPE_TEXT && Auth::user()->type == 'teacher')
+        @if($review == null)
+            <p>Voor deze les is nog geen reader beschikbaar.<br />Heb je deze les al gehad? Vraag je docent dan om de reader te uploaden!</p>
+        @elseif($review->type == \App\Review::TYPE_TEXT)
+            @if(Auth::user()->type == 'student')
+                <p>Voor deze les is geen reader beschikbaar.<br />De docent legt in de les uit wat je gaat doen.</p>
+            @else
                 <pre>{{ $review->comment }}</pre>
-            @elseif(Auth::user()->type == 'teacher')
+            @endif
+        @else    
+            @if(Auth::user()->type == 'teacher')
                 @include('reviews.partial_teacher')
                 <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
                 <div class="collapse" id="history-content">
