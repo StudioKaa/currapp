@@ -14,10 +14,12 @@ class CreateReviewStatusesTable extends Migration
     public function up()
     {
         Schema::create('review_statuses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->unsigned();
             $table->string('title');
             $table->string('context_class');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

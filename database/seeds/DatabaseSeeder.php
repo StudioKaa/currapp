@@ -60,16 +60,34 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('review_statuses')->insert([
+            'id' => 1,
             'title' => 'Concept',
             'context_class' => 'secondary'
         ]);
         DB::table('review_statuses')->insert([
+            'id' => 2,
             'title' => 'In-review',
             'context_class' => 'warning'
         ]);
         DB::table('review_statuses')->insert([
+            'id' => 3,
             'title' => 'Compleet',
             'context_class' => 'success'
+        ]);
+        DB::table('review_statuses')->insert([
+            'id' => 4,
+            'title' => 'Compleet, SV mist',
+            'context_class' => 'primary'
+        ]);
+        DB::table('review_statuses')->insert([
+            'id' => 5,
+            'title' => 'Nieuw',
+            'context_class' => 'danger'
+        ]);
+        DB::table('review_statuses')->insert([
+            'id' => 6,
+            'title' => 'Geen lesmateriaal',
+            'context_class' => 'secondary'
         ]);
     }
 }

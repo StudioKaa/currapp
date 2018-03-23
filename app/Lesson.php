@@ -30,17 +30,29 @@ class Lesson extends Model
 		return $this->hasMany(Review::class)->orderBy('created_at', 'desc');
 	}
 
-	public function status()
+	public function current_review()
 	{
-		if(!$this->reviews->count())
+		if(Auth::user()->type == 'student')
 		{
-			$status = new Review_status();
-			$status->title = "Nieuw";
-			$status->context_class = "danger";
-			return $status;
+			return $this->reviews()
+                ->where('review_status_id', Review_status::COMPLETE)
+                ->where('sv_do_path', '<>', null)
+                ->first();
 		}
 
-		return $this->reviews->first()->status();
+		return $this->reviews()->first();
+	}
+
+	public function status()
+	{
+		$review = $this->current_review();
+
+		if($review == null)
+		{
+			return (Auth::user()->type == 'student') ? Review_status::get(Review_status::NO_READER) : Review_status::get(Review_status::NEW);
+		}
+
+		return $review->status();
 	}
 
 	public function getFileName()
