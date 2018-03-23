@@ -34,9 +34,7 @@ class Lesson extends Model
 	{
 		if(!$this->reviews->count())
 		{
-			$status = new Review_status();
-			$status->title = "Nieuw";
-			$status->context_class = "danger";
+			$status = Review_status::get(Review_status::NEW);
 			return $status;
 		}
 

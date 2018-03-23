@@ -8,12 +8,6 @@ use App\User;
 
 class Review extends Model
 {
-
-    const STATUS_NONE = 0;
-    const STATUS_CONCEPT = 1;
-    const STATUS_IN_REVIEW = 2;
-    const STATUS_COMPLETE = 3;
-
     const TYPE_FILE = 0;
     const TYPE_WIKI = 1;
     const TYPE_TEXT = 2;
@@ -21,14 +15,11 @@ class Review extends Model
     public function status()
     {
     	$status = Review_status::find($this->review_status_id);
-    	if($status->title == 'Compleet' && $this->sv_filename == null)
+    	if($status->is(Review_status::COMPLETE) && $this->sv_filename == null)
 		{
-			$status = new Review_status();
-			$status->title = "Compleet, SV mist";
-			$status->context_class = "primary";
+			$status = Review_status::get(Review_status::COMPLETE_SV_MISSING);
 		}
 		return $status;
-
     }
 
     public function reviewer()

@@ -7,6 +7,7 @@ use App\Lesson;
 use Illuminate\Http\Request;
 use App\User;
 use App\Review;
+use App\Review_status;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
@@ -78,7 +79,7 @@ class LessonController extends Controller
         {
             $history = null;
             $review = $lesson->reviews()
-                ->where('review_status_id', Review::STATUS_COMPLETE)
+                ->where('review_status_id', Review_status::COMPLETE)
                 ->where('sv_do_path', '<>', null)
                 ->first();
         }
