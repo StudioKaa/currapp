@@ -56,17 +56,17 @@ class ReviewCreateController extends Controller
         switch (request('reviewer_id')) {
             case '-1':
                 $reviewer_id = null;
-                $review_status_id = Review::STATUS_CONCEPT;
+                $review_status_id = Review_status::CONCEPT;
                 break;
             
             case '0':
                 $reviewer_id = null;
-                $review_status_id = Review::STATUS_COMPLETE;
+                $review_status_id = Review_status::COMPLETE;
                 break;
 
             default:
                 $reviewer_id = request('reviewer_id');
-                $review_status_id = Review::STATUS_IN_REVIEW;
+                $review_status_id = Review_status::IN_REVIEW;
                 break;
         }
 
@@ -111,7 +111,7 @@ class ReviewCreateController extends Controller
 
         $review = new Review();
         $review->lesson_id = request('lesson');
-        $review->review_status_id = Review::STATUS_COMPLETE;
+        $review->review_status_id = Review_status::COMPLETE;
         $review->author_id = \Auth::user()->id;
         $review->type = Review::TYPE_WIKI;
         $review->reviewer_id = null; 
@@ -153,7 +153,7 @@ class ReviewCreateController extends Controller
 
         $review = new Review();
         $review->lesson_id = request('lesson');
-        $review->review_status_id = Review::STATUS_COMPLETE;
+        $review->review_status_id = Review_status::COMPLETE;
         $review->author_id = \Auth::user()->id;
         $review->type = Review::TYPE_TEXT;
         $review->comment = $request->message;
