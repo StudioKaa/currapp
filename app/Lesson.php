@@ -45,13 +45,14 @@ class Lesson extends Model
 
 	public function status()
 	{
-		if(!$this->reviews->count())
+		$review = $this->current_review();
+
+		if($review == null)
 		{
-			$status = Review_status::get(Review_status::NEW);
-			return $status;
+			return (Auth::user()->type == 'student') ? Review_status::get(Review_status::NO_READER) : Review_status::get(Review_status::NEW);
 		}
 
-		return $this->reviews->first()->status();
+		return $review->status();
 	}
 
 	public function getFileName()
