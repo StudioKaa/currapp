@@ -5,7 +5,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::group(['middleware' => 'admin'], function(){
 
 		Route::resource('educations', 'EducationController', ['except' => ['index', 'show']]);
-		Route::resource('cohorts', 'CohortController', ['except' => ['index', 'show']]);
+		Route::resource('cohorts', 'CohortController', ['except' => ['index', 'show', 'edit', 'update']]);
 		Route::resource('terms', 'TermController', ['except' => ['index', 'show']]);
 		Route::resource('lesson_types', 'LessonTypeController', ['except' => ['index', 'show']]);
 		Route::resource('lessons', 'LessonController', ['except' => ['index', 'show']]);

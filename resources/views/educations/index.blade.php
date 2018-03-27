@@ -12,7 +12,7 @@
         @foreach ($educations as $education)
             <a class="link-card" href="/educations/{{ $education->title }}/now">
                 <h4>{{ $education->title }}</h4>
-                <p class="card-text">{{ $education->description }}</p>
+                <p class="card-text">{{ $education->sub_title }}</p>
             </a>
         @endforeach
     </div>

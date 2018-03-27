@@ -22,9 +22,6 @@
     <a class="btn btn-outline-secondary navbar-text" href="/terms/create?cohort={{ $cohort->id }}">
         <i class="fa fa-plus" aria-hidden="true"></i> <span>Periode</span>
     </a>
-    <a class="btn btn-outline-secondary navbar-text" href="/cohorts/{{ $cohort->id }}/edit">
-        <i class="fa fa-pencil" aria-hidden="true"></i> <span>{{ $cohort->start_year }} - {{ $cohort->exam_year }}</span>
-    </a>
 @endsection
 
 @push('styles')

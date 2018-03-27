@@ -41,7 +41,11 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Periode-nummer</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="order" value="{{ old('order', $term->order) }}">
+      @if($term->exists)
+        <input type="text" readonly class="form-control-plaintext" value="{{ $term->order }}">
+      @else
+        <input type="text" class="form-control" name="order" value="{{ old('order', $term->order) }}">
+      @endif
       <small class="form-text text-muted">Dit nummer loopt door over de jaren (bijv. periode 1 t/m 12).</small>
     </div>
   </div>

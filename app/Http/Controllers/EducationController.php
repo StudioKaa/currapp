@@ -42,8 +42,6 @@ class EducationController extends Controller
             }
         }
 
-        //return $terms;
-
         return view('educations.now')
             ->with('education', $education)
             ->with('terms', $terms);
@@ -80,6 +78,7 @@ class EducationController extends Controller
         $education = new Education();
 
         $education->title = request('title');
+        $education->sub_title = request('sub_title');
         $education->duration = request('duration');
         $education->terms_per_year = request('terms_per_year');
 
@@ -124,13 +123,7 @@ class EducationController extends Controller
      */
     public function update(Request $request, Education $education)
     {
-        $this->validate(request(), [
-
-            'title' => 'required|alpha_dash'
-
-        ]);
-
-        $education->title = request('title');
+        $education->sub_title = request('sub_title');
         $education->save();
         return redirect('/educations/' . $education->id);
     }
