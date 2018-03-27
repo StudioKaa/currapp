@@ -77,42 +77,6 @@ class CohortController extends Controller
             ->with('terms', $cohort->terms);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Cohort  $cohort
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cohort $cohort)
-    {
-        return view('cohorts.form')
-            ->with('education', $cohort->education)
-            ->with('cohort', $cohort);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cohort  $cohort
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cohort $cohort)
-    {
-        $this->validate(request(), [
-
-            'start_year' => 'required|integer',
-
-        ]);
-
-        $cohort->start_year = request('start_year');
-        $cohort->exam_year = $cohort->start_year + $cohort->education->duration;
-
-        $cohort->save();
-
-        return redirect('/cohorts/' . $cohort->id);
-    }
-
     public function delete(Cohort $cohort)
     {
         return view('cohorts.delete')
