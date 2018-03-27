@@ -19,10 +19,10 @@ class Cohort extends Model
     	return $this->hasMany(Term::class);
     }
 
-    public function getTitleAttribute($nospaces = false)
+    public function getTitleAttribute($nospaces = false, $separator = '-')
     {
         $title = $this->start_year;
-        $title .= $nospaces ? '-' : ' - ';
+        $title .= $nospaces ? $separator : ' ' . $separator . ' ';
         $title .= $this->exam_year;
 
         return $title;
