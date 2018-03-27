@@ -67,14 +67,21 @@ class TermController extends Controller
         $this->validate(request(), [
 
             'cohort' => 'required|integer',
+            'order' => 'required|integer|min:1',
             'sub_title' => 'present',
             'duration' => 'required|integer|min:1',
 
         ]);
 
-        $term = new Term();
+        $cohort = Cohort::find(request('cohort'));
+        if($cohort->terms->where('order', request('order'))->count())
+        {
+            return back()->withErrors('Een periode met dit nummer bestaat al.');
+        }
 
+        $term = new Term();
         $term->cohort_id = request('cohort');
+        $term->order = request('order');
         $term->sub_title = request('sub_title');
         $term->duration = request('duration');
 
@@ -124,13 +131,11 @@ class TermController extends Controller
     {
         $this->validate(request(), [
 
-            'order' => 'required|integer|min:1',
             'sub_title' => 'present',
             'duration' => 'required|integer|min:1',
 
         ]);
 
-        $term->order = request('order');
         $term->sub_title = empty(request('sub_title')) ? null : request('sub_title');
         $term->duration = request('duration');
 
