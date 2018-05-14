@@ -20,10 +20,13 @@ Carbon::setLocale(config('app.locale')); ?>
     </ol>
 @endsection
 
-@section('buttons-right')
+@section('buttons-student')
     <a class="btn btn-outline-secondary navbar-text" href="/terms/{{ $term->id }}">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i> <span>Overzicht</span>
+        <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog
     </a>
+@endsection
+
+@section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/lessons/{{ $lesson->id }}/edit">
         <i class="fa fa-pencil" aria-hidden="true"></i> <span>{{ $lesson->title }}</span>
     </a>

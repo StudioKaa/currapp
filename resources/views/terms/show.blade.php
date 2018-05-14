@@ -22,8 +22,8 @@
 @endsection
 
 @section('buttons-student')
-    <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i> <span>Terug</span>
+    <a class="btn btn-outline-secondary navbar-text" href="/cohorts/{{ $cohort->id }}">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog
     </a>
 @endsection
 

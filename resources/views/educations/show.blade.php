@@ -8,6 +8,12 @@
     </ol>
 @endsection
 
+@section('buttons-student')
+    <a class="btn btn-outline-secondary navbar-text" href="/educations">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog
+    </a>
+@endsection
+
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/cohorts/create?education={{ $education->id }}">
         <i class="fa fa-plus" aria-hidden="true"></i> <span>Cohort</span>

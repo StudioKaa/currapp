@@ -18,6 +18,12 @@
     </ol>
 @endsection
 
+@section('buttons-student')
+    <a class="btn btn-outline-secondary navbar-text" href="/educations/{{ $education->id }}">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog
+    </a>
+@endsection
+
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/terms/create?cohort={{ $cohort->id }}">
         <i class="fa fa-plus" aria-hidden="true"></i> <span>Periode</span>

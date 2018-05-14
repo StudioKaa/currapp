@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('buttons-right')
+    <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
+        <i class="fa fa-times" aria-hidden="true"></i> <span>Annuleren</span>
+    </a>
+@endsection
+
 @section('content')
   
     <form method="POST" action="{{ route('lessons.assets.destroy', [$asset->lesson, $asset]) }}">

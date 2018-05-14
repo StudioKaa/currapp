@@ -7,8 +7,7 @@
 @endsection
 
 @section('buttons-right')
-    <?php $href = $term->exists ? '/terms/' . $term->id : '/cohorts/' . $cohort->id; ?>
-    <a class="btn btn-outline-secondary navbar-text" href="{{ $href }}">
+    <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
         <i class="fa fa-times" aria-hidden="true"></i> <span>Annuleren</span>
     </a>
 @endsection
