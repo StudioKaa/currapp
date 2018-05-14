@@ -89,5 +89,10 @@ class DatabaseSeeder extends Seeder
             'title' => 'Geen lesmateriaal',
             'context_class' => 'secondary'
         ]);
+        DB::table('review_statuses')->insert([
+            'id' => 7,
+            'title' => 'Concept, student ziet compleet',
+            'context_class' => 'gradient'
+        ]);
     }
 }

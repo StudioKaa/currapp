@@ -14,6 +14,7 @@ class Review_status extends Model
     const COMPLETE_SV_MISSING = 4;
     const NEW = 5;
     const NO_READER = 6;
+    const COMPLETE_WITH_CONCEPT = 7;
 
     public function is($compare)
     {

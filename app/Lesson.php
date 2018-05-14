@@ -60,6 +60,11 @@ class Lesson extends Model
 			return (Auth::user()->type == 'student') ? Review_status::get(Review_status::NO_READER) : Review_status::get(Review_status::NEW);
 		}
 
+		if($review->status()->is(\App\Review_status::CONCEPT) && $this->has_reader_for_student())
+		{
+			return Review_status::get(Review_status::COMPLETE_WITH_CONCEPT);
+		}
+
 		return $review->status();
 	}
 
