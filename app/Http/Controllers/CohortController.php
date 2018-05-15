@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Education;
 use App\Cohort;
-use Illuminate\Http\Request;
 use App\Term;
+use App\Traits\GenerateBreadcrumbs;
+use Illuminate\Http\Request;
 
 class CohortController extends Controller
 {
+    
+    use GenerateBreadcrumbs;
+
     /**
      * Show the form for creating a new resource.
      *
@@ -21,7 +25,8 @@ class CohortController extends Controller
 
         return view('cohorts.form')
             ->with('education', $education)
-            ->with('cohort', $cohort);
+            ->with('cohort', $cohort)
+            ->with('breadcrumbs', $this->breadcrumbs($education, 'Nieuw cohort'));
     }
 
     /**
@@ -74,13 +79,15 @@ class CohortController extends Controller
         return view('cohorts.show')
             ->with('education', $cohort->education)
             ->with('cohort', $cohort)
-            ->with('terms', $cohort->terms);
+            ->with('terms', $cohort->terms)
+            ->with('breadcrumbs', $this->breadcrumbs($cohort));
     }
 
     public function delete(Cohort $cohort)
     {
         return view('cohorts.delete')
-            ->with('cohort', $cohort);
+            ->with('cohort', $cohort)
+            ->with('breadcrumbs', $this->breadcrumbs($cohort, 'Verwijderen'));
     }
 
     /**
