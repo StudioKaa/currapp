@@ -35,10 +35,10 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::redirect('/', '/educations', 301);
 	Route::redirect('/home', '/educations', 301);
 	Route::get('/educations', 'EducationController@index')->name('home');
-	Route::get('/educations/{slug}/now', 'EducationController@now');
-	Route::get('/educations/{education}', 'EducationController@show');
-	Route::get('/cohorts/{cohort}', 'CohortController@show');
-	Route::get('/terms/{term}', 'TermController@show');
+	Route::get('/educations/{slug}/now', 'EducationController@now')->name('educations.now');
+	Route::get('/educations/{education}', 'EducationController@show')->name('educations.show');
+	Route::get('/cohorts/{cohort}', 'CohortController@show')->name('cohorts.show');
+	Route::get('/terms/{term}', 'TermController@show')->name('terms.show');
 	Route::get('/terms/find/{id}', 'TermController@find');
 	Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
 	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
