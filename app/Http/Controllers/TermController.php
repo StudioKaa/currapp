@@ -4,18 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Cohort;
 use App\Term;
+use App\Traits\GenerateBreadcrumbs;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
 
 class TermController extends Controller
 {
     
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+    use GenerateBreadcrumbs;
 
     /**
      * Try to find term in cohort by combined key (cohort_id.term_title).
@@ -53,7 +49,8 @@ class TermController extends Controller
 
         return view('terms.form')
             ->with('term', $term)
-            ->with('cohort', $cohort);
+            ->with('cohort', $cohort)
+            ->with('breadcrumbs', $this->breadcrumbs($cohort, 'Nieuwe periode'));
     }
 
     /**
@@ -104,7 +101,8 @@ class TermController extends Controller
             ->with('education', $term->cohort->education)
             ->with('cohort', $term->cohort)
             ->with('term', $term)
-            ->with('lesson_types', $lesson_types);
+            ->with('lesson_types', $lesson_types)
+            ->with('breadcrumbs', $this->breadcrumbs($term));
     }
 
     /**
@@ -117,7 +115,8 @@ class TermController extends Controller
     {
         return view('terms.form')
             ->with('term', $term)
-            ->with('cohort', $term->cohort);
+            ->with('cohort', $term->cohort)
+            ->with('breadcrumbs', $this->breadcrumbs($term, 'Aanpassen'));
     }
 
     /**
@@ -147,7 +146,8 @@ class TermController extends Controller
     function delete(Term $term)
     {
         return view('terms.delete')
-            ->with('term', $term);
+            ->with('term', $term)
+            ->with('breadcrumbs', $this->breadcrumbs($term, 'Verwijderen'));
     }
 
     /**

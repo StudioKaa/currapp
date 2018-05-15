@@ -36,7 +36,7 @@
                     <ol class="my-breadcrumb navbar-text">
                         @foreach($breadcrumbs as $crumb)
                             <li class="breadcrumb-item">
-                                @if(isset($crumb->link))
+                                @if(isset($crumb->link) && !$loop->last)
                                     <a href="{{ $crumb->link }}">{{ $crumb->text }}</a>
                                 @else
                                     {{ $crumb->text }}

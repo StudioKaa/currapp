@@ -1,26 +1,5 @@
 @extends('layouts.app')
 
-@section('breadcrumbs')
-    <ol class="my-breadcrumb navbar-text">
-        <li class="breadcrumb-item">
-            <a href="/educations/{{ $education->title }}/now">{{ $education->title }}</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="/cohorts/{{ $cohort->id }}">{{ $cohort->title }}</a>
-            <!-- <select class="cohort-select" id="to-cohort">
-                @foreach($cohort->education->cohorts as $c)
-                    <option value="{{ $c->id }}" <?php echo $c->id == $cohort->id ? 'selected' : '' ?>>
-                        {{ $c->start_year }} - {{ $c->exam_year }}
-                    </option>
-                @endforeach
-            </select> -->
-        </li>
-        <li class="breadcrumb-item">
-            {{ $term->title }}
-        </li>
-    </ol>
-@endsection
-
 @section('buttons-student')
     <a class="btn btn-outline-secondary navbar-text" href="/cohorts/{{ $cohort->id }}">
         <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog

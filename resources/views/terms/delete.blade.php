@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > Periode verwijderen
-@endsection
-
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
         <i class="fa fa-times" aria-hidden="true"></i> <span>Annuleren</span>

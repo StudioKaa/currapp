@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    > <a class="navbar-text" href="/educations/{{ $cohort->education->id }}">{{ $cohort->education->title }}</a>
-    > <a class="navbar-text" href="/cohorts/{{ $cohort->id }}">{{ $cohort->start_year }} - {{ $cohort->exam_year }}</a>
-    > {{ $term->exists ? 'Periode aanpassen' : 'Nieuwe periode' }}
-@endsection
-
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="{{ URL::previous() }}">
         <i class="fa fa-times" aria-hidden="true"></i> <span>Annuleren</span>
