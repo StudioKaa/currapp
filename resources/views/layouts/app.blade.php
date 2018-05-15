@@ -4,7 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>CurrApp</title>
+    <title>
+        CurrApp
+        @if(isset($breadcrumbs))
+            @foreach($breadcrumbs as $crumb)
+                > {{ $crumb->text }}
+            @endforeach
+        @endif
+    </title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="{{URL::asset('css/app.css')}}" rel="stylesheet">
@@ -25,7 +32,19 @@
                 <a class="navbar-brand" href="{{ url('educations') }}">
                     Curr<span class="text-muted">App</span>
                 </a>
-                @yield('breadcrumbs')
+                @if(isset($breadcrumbs))
+                    <ol class="my-breadcrumb navbar-text">
+                        @foreach($breadcrumbs as $crumb)
+                            <li class="breadcrumb-item">
+                                @if(isset($crumb->link))
+                                    <a href="{{ $crumb->link }}">{{ $crumb->text }}</a>
+                                @else
+                                    {{ $crumb->text }}
+                                @endif
+                            </li>
+                        @endforeach
+                    </ol>
+                @endif
             </div>
             <div class="btn-group">
                 @if(Auth::check())
