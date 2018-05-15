@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Term;
 use App\Lesson_type;
+use App\Traits\GenerateBreadcrumbs;
 use Illuminate\Http\Request;
 
 class LessonTypeController extends Controller
 {
     
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    use GenerateBreadcrumbs;
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +26,8 @@ class LessonTypeController extends Controller
             ->with('education', $term->cohort->education)
             ->with('cohort', $term->cohort)
             ->with('term', $term)
-            ->with('lesson_type', $lesson_type);
+            ->with('lesson_type', $lesson_type)
+            ->with('breadcrumbs', $this->breadcrumbs($term, 'Nieuwe lesvorm'));
     }
 
     /**
@@ -72,7 +71,8 @@ class LessonTypeController extends Controller
             ->with('education', $lesson_type->term->cohort->education)
             ->with('cohort', $lesson_type->term->cohort)
             ->with('term', $lesson_type->term)
-            ->with('lesson_type', $lesson_type);
+            ->with('lesson_type', $lesson_type)
+            ->with('breadcrumbs', $this->breadcrumbs($lesson_type, 'Aanpassen'));
     }
 
     /**
@@ -104,7 +104,8 @@ class LessonTypeController extends Controller
     public function delete(Lesson_type $lesson_type)
     {
         return view('lesson_types.delete')
-            ->with('lesson_type', $lesson_type);
+            ->with('lesson_type', $lesson_type)
+            ->with('breadcrumbs', $this->breadcrumbs($lesson_type, 'Verwijderen'));
     }
 
     /**

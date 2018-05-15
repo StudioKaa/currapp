@@ -23,7 +23,12 @@ trait GenerateBreadcrumbs{
             {
                 $crumb['text'] = $input->lesson_type->title . ': ' . $input->title;
                 $crumb['link'] = route('lessons.show', $input);
+                //Skip to term directly from lesson
                 $input = $input->lesson_type->term;
+            }
+            elseif($input instanceof \App\Lesson_type)
+            {
+                $input = $input->term;
             }
             elseif($input instanceof \App\Term)
             {
