@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('breadcrumbs')
-    <ol class="my-breadcrumb navbar-text">
-        <li class="breadcrumb-item">
-            <a href="/educations/{{ $education->id }}">{{ $education->title }}</a>
-        </li>
-    </ol>
-@endsection
-
 @push('styles')
     <link rel="stylesheet" href="{{ URL::asset('css/cohort.css') }}">
 @endpush

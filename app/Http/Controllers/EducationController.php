@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Education;
 use App\Cohort;
+use App\Traits\GenerateBreadcrumbs;
 use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
+
+    use GenerateBreadcrumbs;
+
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +49,8 @@ class EducationController extends Controller
 
         return view('educations.now')
             ->with('education', $education)
-            ->with('terms', $terms);
+            ->with('terms', $terms)
+            ->with('breadcrumbs', $this->breadcrumbs($education, 'Overzicht'));
     }
 
     /**
@@ -57,7 +62,8 @@ class EducationController extends Controller
     {
         $education = new Education();
         return view('educations.form')
-            ->with('education', $education);
+            ->with('education', $education)
+            ->with('breadcrumbs', $this->breadcrumbs('Nieuwe opleiding'));
     }
 
     /**
@@ -99,7 +105,8 @@ class EducationController extends Controller
         
         return view('educations.show')
             ->with('education', $education)
-            ->with('cohorts', $education->cohorts);
+            ->with('cohorts', $education->cohorts)
+            ->with('breadcrumbs', $this->breadcrumbs($education, 'Alle cohorten'));
 
     }
 
@@ -112,7 +119,8 @@ class EducationController extends Controller
     public function edit(Education $education)
     {
         return view('educations.form')
-            ->with('education', $education);
+            ->with('education', $education)
+            ->with('breadcrumbs', $this->breadcrumbs($education, 'Aanpassen'));
     }
 
     /**
@@ -132,7 +140,8 @@ class EducationController extends Controller
     public function delete(Education $education)
     {
         return view('educations.delete')
-            ->with('education', $education);
+            ->with('education', $education)
+            ->with('breadcrumbs', $this->breadcrumbs($education, 'Verwijderen'));
     }
 
     /**

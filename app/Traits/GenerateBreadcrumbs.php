@@ -8,6 +8,12 @@ trait GenerateBreadcrumbs{
 
         $crumbs = collect();
 
+        if(is_string($input))
+        {
+            $addition = $input;
+            $input = null;
+        }
+
         if($addition != null)
         {
             $crumb = ['text' => $addition];

@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('breadcrumbs')
-    <ol class="my-breadcrumb navbar-text">
-        <li class="breadcrumb-item">
-            {{ $education->title }}
-        </li>
-    </ol>
-@endsection
-
 @section('buttons-student')
     <a class="btn btn-outline-secondary navbar-text" href="/educations">
         <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog
