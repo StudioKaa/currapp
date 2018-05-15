@@ -22,9 +22,10 @@ class EducationController extends Controller
 
     public function now($slug)
     {
-        $education = Education::where('title', $slug)->first();
+        $field = is_numeric($slug) ? 'id' : 'title';
+        $education = Education::where($field, $slug)->first();
+
         $schoolyear = (date('m') > 6) ? date('Y') : date('Y')-1;
-        
         $terms = array();
         for($i = 0; $i < $education->duration; $i++)
         {
