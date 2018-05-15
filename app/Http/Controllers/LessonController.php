@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Review;
 use App\Review_status;
+use App\Traits\GenerateBreadcrumbs;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
 class LessonController extends Controller
 {
+    
+    use GenerateBreadcrumbs;
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +33,8 @@ class LessonController extends Controller
             ->with('cohort', $lesson_type->term->cohort)
             ->with('term', $lesson_type->term)
             ->with('lesson_type', $lesson_type)
-            ->with('lesson', $lesson);
+            ->with('lesson', $lesson)
+            ->with('breadcrumbs', $this->breadcrumbs($lesson_type, 'Nieuwe les'));
     }
 
     /**
@@ -91,7 +96,8 @@ class LessonController extends Controller
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
             ->with('review', $review)
-            ->with('history', $history);
+            ->with('history', $history)
+            ->with('breadcrumbs', $this->breadcrumbs($lesson));
     }
 
     /**
@@ -107,7 +113,8 @@ class LessonController extends Controller
             ->with('cohort', $lesson->lesson_type->term->cohort)
             ->with('term', $lesson->lesson_type->term)
             ->with('lesson_type', $lesson->lesson_type)
-            ->with('lesson', $lesson);
+            ->with('lesson', $lesson)
+            ->with('breadcrumbs', $this->breadcrumbs($lesson, 'Aanpassen'));
     }
 
     /**
@@ -141,7 +148,8 @@ class LessonController extends Controller
     public function delete(Lesson $lesson)
     {
         return view('lessons.delete')
-            ->with('lesson', $lesson);
+            ->with('lesson', $lesson)
+            ->with('breadcrumbs', $this->breadcrumbs($lesson, 'Verwijderen'));
     }
 
     /**
