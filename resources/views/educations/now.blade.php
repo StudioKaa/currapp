@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{ URL::asset('css/cohort.css') }}">
 @endpush
 
+@section('buttons-student')
+    <a class="btn btn-outline-secondary navbar-text" href="/educations">
+        <i class="fa fa-chevron-up" aria-hidden="true"></i> Omhoog
+    </a>
+@endsection
+
 @section('buttons-right')
     <a class="btn btn-outline-secondary navbar-text" href="/cohorts/create?education={{ $education->id }}">
         <i class="fa fa-plus" aria-hidden="true"></i> <span>Cohort</span>
@@ -15,7 +21,14 @@
 
 @section('content')
     
-    <p class="d-flex justify-content-end"><a href="{{ url('educations', $education->id) }}">Bekijk alle cohorten (geschiedenis) &gt;</a></p>
+    <ul class="nav nav-tabs mb-5 justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('educations.show', $education) }}">Alle jaren</a>
+        </li>
+        <li class="nav-item mr-3">
+            <a class="nav-link active">Dit jaar</a>
+        </li>
+    </ul>
 
     <div class="cohort-grid" style="grid-template-columns: 90px repeat({{ $education->terms_per_year }}, 1fr);">
         @foreach ($terms as $schoolyear => $year)

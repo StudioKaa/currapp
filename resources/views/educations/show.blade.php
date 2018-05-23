@@ -17,6 +17,15 @@
 
 @section('content')
 
+    <ul class="nav nav-tabs mb-5 justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active">Alle jaren</a>
+        </li>
+        <li class="nav-item mr-3">
+            <a class="nav-link" href="{{ route('educations.now', $education) }}">Dit jaar</a>
+        </li>
+    </ul>
+
     <div class="card-container">
         @foreach ($cohorts as $cohort)
             <a class="link-card" href="{{ url('cohorts', [$cohort->id]) }}">
