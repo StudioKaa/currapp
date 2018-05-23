@@ -44,15 +44,16 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Resonant</label>
+        <label class="col-sm-2 col-form-label">Status</label>
         <div class="col-sm-10">
-          <select class="form-control" name="reviewer_id">
-            <option value="-1">geen (opslaan als concept)</option>
-            <option value="0">geen (forceer compleet)</option>
-            @foreach($users as $user):
-              <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-          </select>
+          <div class="btn-group" data-toggle="buttons"> 
+            @foreach($statuses as $status) 
+            <label class="btn btn-outline-primary" for="status{{ $status->id }}"> 
+              <input class="form-check-input" type="radio" name="review_status_id" id="status{{ $status->id }}" value="{{ $status->id }}"> 
+              {{ $status->title }} 
+             </label> 
+          @endforeach 
+          </div> 
         </div>
       </div>
 

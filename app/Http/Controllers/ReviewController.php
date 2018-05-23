@@ -47,39 +47,6 @@ class ReviewController extends Controller
         return redirect($this->temporaryUrl($time, $review->sv_do_path));
     }
 
-    public function review_form(Review $review)
-    {
-        $review->author = User::find($review->author_id);
-        $review->reviewer = \Auth::user();
-
-        return view('reviews.review')
-            ->with('education', $review->lesson->lesson_type->term->cohort->education)
-            ->with('cohort', $review->lesson->lesson_type->term->cohort)
-            ->with('term', $review->lesson->lesson_type->term)
-            ->with('lesson_type', $review->lesson->lesson_type)
-            ->with('lesson', $review->lesson)
-            ->with('review', $review)
-            ->with('statuses', Review_status::all());
-    }
-
-    public function review_store(Request $request, Review $review)
-    {
-        $this->validate(request(), [
-
-            'review_status_id' => 'required|integer',
-            'comment' => 'nullable|string'
-
-        ]);
-
-
-        $review->review_status_id = request('review_status_id');
-        $review->reviewer_id = \Auth::user()->id;
-        $review->comment = request('comment');
-        $review->save();
-
-        return redirect('/lessons/' . $review->lesson->id);
-    }
-
     public function addfiles_form(Review $review)
     {
         return view('reviews.addfiles')

@@ -35,20 +35,7 @@
             @endif
         </li>
     </ul>
-    <div class="card-body">
-        @if($review->comment != null && $review->status()->title != 'Compleet')
-            <p>
-                <span class="text-muted">{{ $review->reviewer()->name }}: </span>
-                {{ $review->comment }}
-            </p>
-        @endif
-        <div class="btn-group review-buttons">
-            @if($review->status()->title == 'Concept' || $review->status()->title == 'In-review')
-                <a href="/reviews/{{ $review->id }}/review" class="card-link btn btn-outline-primary"><i class="fa fa-eye"></i> Reviewen</a>
-            @endif
-        </div>
-    </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-muted border-top-0">
         {{ $review->status()->title }} ({{ $review->created_at->diffForHumans() }} door {{ $review->author()->name }})
     </div>
 </div>
