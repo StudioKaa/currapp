@@ -32,7 +32,7 @@ class ReviewCreateController extends Controller
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
             ->with('review', $review)
-            ->with('statuses', Review_status::all());
+            ->with('statuses', Review_status::where('pickable', true)->get());
     }
 
     /**
@@ -46,7 +46,7 @@ class ReviewCreateController extends Controller
         $this->validate(request(), [
 
             'lesson' => 'required|integer',
-            'review_status_id' => 'integer',
+            'review_status_id' => 'required|integer',
             'wv_file' => 'required|file',
             'tv_file' => 'nullable|file',
             'sv_file' => 'nullable|file'

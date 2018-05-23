@@ -17,6 +17,7 @@ class CreateReviewStatusesTable extends Migration
             $table->integer('id')->unsigned();
             $table->string('title');
             $table->string('context_class');
+            $table->boolean('pickable');
             $table->timestamps();
 
             $table->primary('id');
