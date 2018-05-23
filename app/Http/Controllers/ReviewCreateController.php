@@ -32,7 +32,7 @@ class ReviewCreateController extends Controller
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
             ->with('review', $review)
-            ->with('users', User::where('type', 'teacher')->get());
+            ->with('statuses', Review_status::where('pickable', true)->get());
     }
 
     /**
@@ -46,35 +46,17 @@ class ReviewCreateController extends Controller
         $this->validate(request(), [
 
             'lesson' => 'required|integer',
-            'reviewer_id' => 'integer',
+            'review_status_id' => 'required|integer',
             'wv_file' => 'required|file',
             'tv_file' => 'nullable|file',
             'sv_file' => 'nullable|file'
 
         ]);
 
-        switch (request('reviewer_id')) {
-            case '-1':
-                $reviewer_id = null;
-                $review_status_id = Review_status::CONCEPT;
-                break;
-            
-            case '0':
-                $reviewer_id = null;
-                $review_status_id = Review_status::COMPLETE;
-                break;
-
-            default:
-                $reviewer_id = request('reviewer_id');
-                $review_status_id = Review_status::IN_REVIEW;
-                break;
-        }
-
         $review = new Review();
         $review->lesson_id = request('lesson');
-        $review->review_status_id = $review_status_id;
+        $review->review_status_id = request('review_status_id');
         $review->author_id = \Auth::user()->id;
-        $review->reviewer_id = $reviewer_id; 
         $review->type = Review::TYPE_FILE;
         $review->save();
 

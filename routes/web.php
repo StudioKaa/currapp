@@ -26,8 +26,6 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::resource('reviews', 'ReviewController', ['only' => ['edit', 'update']]);
 		Route::get('reviews/{review}/addfiles', 'ReviewController@addfiles_form');
 		Route::patch('reviews/{review}/addfiles', 'ReviewController@addfiles_store');
-		Route::get('reviews/{review}/review', 'ReviewController@review_form');
-		Route::patch('/reviews/{review}/review', 'ReviewController@review_store');
 		Route::get('reviews/{review}/wv', 'ReviewController@get_file_wv');
 		Route::get('reviews/{review}/tv', 'ReviewController@get_file_tv');
 	});

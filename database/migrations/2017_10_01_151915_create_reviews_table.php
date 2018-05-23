@@ -19,14 +19,12 @@ class CreateReviewsTable extends Migration
             $table->integer('review_status_id')->unsigned();
             $table->string('author_id');
             $table->integer('type');
-            $table->string('reviewer_id')->nullable();
             $table->text('wv_filename')->nullable();
             $table->text('wv_do_path')->nullable();
             $table->text('tv_filename')->nullable();
             $table->text('tv_do_path')->nullable();
             $table->text('sv_filename')->nullable();
             $table->text('sv_do_path')->nullable();
-            $table->text('comment')->nullable();
             $table->timestamps();
 
             $table->foreign('lesson_id')
