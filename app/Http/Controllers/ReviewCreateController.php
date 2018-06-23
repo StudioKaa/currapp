@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
+use App\Revision;
 use App\Lesson;
 use App\User;
-use App\Review_status;
+use App\Status;
 use App\Traits\SaveFiles;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -22,17 +22,17 @@ class ReviewCreateController extends Controller
      */
     public function create_file(Lesson $lesson)
     {
-        $review = new Review();
-        $review->author = \Auth::user();
+        $revision = new Revision();
+        $revision->author = \Auth::user();
 
-        return view('reviews.create_file')
+        return view('revisions.create_file')
             ->with('education', $lesson->lesson_type->term->cohort->education)
             ->with('cohort', $lesson->lesson_type->term->cohort)
             ->with('term', $lesson->lesson_type->term)
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
-            ->with('review', $review)
-            ->with('statuses', Review_status::where('pickable', true)->get());
+            ->with('review', $revision)
+            ->with('statuses', Status::getPickables());
     }
 
     /**
@@ -46,21 +46,21 @@ class ReviewCreateController extends Controller
         $this->validate(request(), [
 
             'lesson' => 'required|integer',
-            'review_status_id' => 'required|integer',
+            'status_id' => 'required|integer',
             'wv_file' => 'required|file',
             'tv_file' => 'nullable|file',
             'sv_file' => 'nullable|file'
 
         ]);
+        
+        $revision = new Revision();
+        $revision->lesson_id = request('lesson');
+        $revision->status = request('status_id');
+        $revision->author_id = \Auth::user()->id;
+        $revision->type = Revision::TYPE_FILE;
+        $revision->save();
 
-        $review = new Review();
-        $review->lesson_id = request('lesson');
-        $review->review_status_id = request('review_status_id');
-        $review->author_id = \Auth::user()->id;
-        $review->type = Review::TYPE_FILE;
-        $review->save();
-
-        $this->save_files($request, $review);
+        $this->save_files($request, $revision);
         
         return redirect('/lessons/' . request('lesson'));
     }
@@ -109,41 +109,41 @@ class ReviewCreateController extends Controller
         return redirect('/lessons/' . request('lesson'));
     }
 
-    public function create_text(Lesson $lesson)
-    {
-        $review = new Review();
-        $review->author = \Auth::user();
+    // public function create_text(Lesson $lesson)
+    // {
+    //     $review = new Review();
+    //     $review->author = \Auth::user();
 
-        return view('reviews.create_text')
-            ->with('education', $lesson->lesson_type->term->cohort->education)
-            ->with('cohort', $lesson->lesson_type->term->cohort)
-            ->with('term', $lesson->lesson_type->term)
-            ->with('lesson_type', $lesson->lesson_type)
-            ->with('lesson', $lesson)
-            ->with('review', $review)
-            ->with('users', User::where('type', 'teacher')->get());
-    }
+    //     return view('reviews.create_text')
+    //         ->with('education', $lesson->lesson_type->term->cohort->education)
+    //         ->with('cohort', $lesson->lesson_type->term->cohort)
+    //         ->with('term', $lesson->lesson_type->term)
+    //         ->with('lesson_type', $lesson->lesson_type)
+    //         ->with('lesson', $lesson)
+    //         ->with('review', $review)
+    //         ->with('users', User::where('type', 'teacher')->get());
+    // }
 
-    public function store_text(Request $request)
-    {
-        $this->validate(request(), [
+    // public function store_text(Request $request)
+    // {
+    //     $this->validate(request(), [
 
-            'lesson' => 'required|integer',
-            'message' => 'required|string'
+    //         'lesson' => 'required|integer',
+    //         'message' => 'required|string'
 
-        ]);
+    //     ]);
 
-        $review = new Review();
-        $review->lesson_id = request('lesson');
-        $review->review_status_id = Review_status::COMPLETE;
-        $review->author_id = \Auth::user()->id;
-        $review->type = Review::TYPE_TEXT;
-        $review->comment = $request->message;
-        $review->sv_filename = 'type_of_text';
-        $review->sv_do_path = 'type_of_text';
+    //     $review = new Review();
+    //     $review->lesson_id = request('lesson');
+    //     $review->review_status_id = Review_status::COMPLETE;
+    //     $review->author_id = \Auth::user()->id;
+    //     $review->type = Review::TYPE_TEXT;
+    //     $review->comment = $request->message;
+    //     $review->sv_filename = 'type_of_text';
+    //     $review->sv_do_path = 'type_of_text';
 
-        $review->save();
+    //     $review->save();
         
-        return redirect('/lessons/' . request('lesson'));
-    }
+    //     return redirect('/lessons/' . request('lesson'));
+    // }
 }

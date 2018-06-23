@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::resource('reviews', 'ReviewController', ['only' => ['edit', 'update']]);
 		Route::get('reviews/{review}/addfiles', 'ReviewController@addfiles_form');
 		Route::patch('reviews/{review}/addfiles', 'ReviewController@addfiles_store');
-		Route::get('reviews/{review}/wv', 'ReviewController@get_file_wv');
-		Route::get('reviews/{review}/tv', 'ReviewController@get_file_tv');
+		Route::get('reviews/{revision}/wv', 'RevisionController@get_file_wv')->name('revisions.get.wv');
+		Route::get('reviews/{revision}/tv', 'RevisionController@get_file_tv')->name('revisions.get.tv');
 	});
 
 	Route::redirect('/', '/educations', 301);
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/terms/{term}', 'TermController@show')->name('terms.show');
 	Route::get('/terms/find/{id}', 'TermController@find');
 	Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
-	Route::get('reviews/{review}/sv', 'ReviewController@get_file_sv');
+	Route::get('reviews/{revision}/sv', 'RevisionController@get_file_sv')->name('revisions.get.sv');
 });
 
 if(env('APP_ENV') == 'production')

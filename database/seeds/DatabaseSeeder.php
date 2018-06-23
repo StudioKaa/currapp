@@ -58,48 +58,5 @@ class DatabaseSeeder extends Seeder
             'duration' => 1,
             'title' => 'Wat is een PGO?',
         ]);
-
-        DB::table('review_statuses')->insert([
-            'id' => 1,
-            'title' => 'Concept',
-            'context_class' => 'secondary',
-            'pickable' => true
-        ]);
-        DB::table('review_statuses')->insert([
-            'id' => 2,
-            'title' => 'In-review',
-            'context_class' => 'warning',
-            'pickable' => false
-        ]);
-        DB::table('review_statuses')->insert([
-            'id' => 3,
-            'title' => 'Compleet',
-            'context_class' => 'success',
-            'pickable' => true
-        ]);
-        DB::table('review_statuses')->insert([
-            'id' => 4,
-            'title' => 'Compleet, SV mist',
-            'context_class' => 'primary',
-            'pickable' => false
-        ]);
-        DB::table('review_statuses')->insert([
-            'id' => 5,
-            'title' => 'Nieuw',
-            'context_class' => 'danger',
-            'pickable' => false
-        ]);
-        DB::table('review_statuses')->insert([
-            'id' => 6,
-            'title' => 'Geen lesmateriaal',
-            'context_class' => 'secondary',
-            'pickable' => false
-        ]);
-        DB::table('review_statuses')->insert([
-            'id' => 7,
-            'title' => 'Concept, student ziet compleet',
-            'context_class' => 'gradient',
-            'pickable' => false
-        ]);
     }
 }

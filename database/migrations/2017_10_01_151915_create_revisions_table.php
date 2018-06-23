@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewsTable extends Migration
+class CreateRevisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('revisions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('lesson_id')->unsigned();
-            $table->integer('review_status_id')->unsigned();
+            $table->integer('status')->unsigned();
             $table->string('author_id');
-            $table->integer('type');
-            $table->text('wv_filename')->nullable();
-            $table->text('wv_do_path')->nullable();
-            $table->text('tv_filename')->nullable();
-            $table->text('tv_do_path')->nullable();
-            $table->text('sv_filename')->nullable();
-            $table->text('sv_do_path')->nullable();
+            $table->integer('type')->unsigned();
+            $table->text('wv_title')->nullable();
+            $table->text('wv_path')->nullable();
+            $table->text('tv_title')->nullable();
+            $table->text('tv_path')->nullable();
+            $table->text('sv_title')->nullable();
+            $table->text('sv_path')->nullable();
             $table->timestamps();
 
             $table->foreign('lesson_id')

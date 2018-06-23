@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Review_status;
+use App\Revision;
+use App\Status;
 use Auth;
 
 class Lesson extends Model
@@ -25,47 +26,50 @@ class Lesson extends Model
 		return $assets;
 	}
 
-	public function reviews()
+	public function revisions()
 	{
-		return $this->hasMany(Review::class)->orderBy('created_at', 'desc');
+		return $this->hasMany(Revision::class)->orderBy('created_at', 'desc');
 	}
 
 	public function has_reader_for_student()
 	{
-		return ($this->reviews()
-                ->where('review_status_id', Review_status::COMPLETE)
-                ->where('sv_do_path', '<>', null)
-                ->first() != null) ? true : false;
+		return $this->revisions()
+                ->where('status', Status::COMPLETE)
+                ->where('sv_path', '<>', null)
+                ->count() ? true : false;
 	}
 
-	public function current_review()
+	public function current_revision()
 	{
 		if(Auth::user()->type == 'student')
 		{
-			return $this->reviews()
-                ->where('review_status_id', Review_status::COMPLETE)
-                ->where('sv_do_path', '<>', null)
+			return $this->revisions()
+                ->where('status_id', Status::COMPLETE)
+                ->where('sv_path', '<>', null)
                 ->first();
 		}
 
-		return $this->reviews()->first();
+		return $this->revisions()->first();
 	}
 
 	public function status()
 	{
-		$review = $this->current_review();
+		$revision = $this->current_revision();
+		$user = Auth::user();
 
-		if($review == null)
+		if($revision == null)
 		{
-			return (Auth::user()->type == 'student') ? Review_status::get(Review_status::NO_READER) : Review_status::get(Review_status::NEW);
+			return ($user->type == 'student') 
+				? new Status(Status::NO_READER)
+				: new Status(Status::NEW);
 		}
 
-		if($review->status()->is(\App\Review_status::CONCEPT) && $this->has_reader_for_student())
+		if($revision->status->is(Status::CONCEPT) && $this->has_reader_for_student())
 		{
-			return Review_status::get(Review_status::COMPLETE_WITH_CONCEPT);
+			return new Status(Status::COMPLETE_WITH_CONCEPT);
 		}
 
-		return $review->status();
+		return $revision->status;
 	}
 
 	public function getFileName()

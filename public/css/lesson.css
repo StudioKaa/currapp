@@ -7,7 +7,7 @@
 	max-width: calc(100vw - 30px);
 }
 
-.reviews, .assets{
+.revisions, .assets{
 	margin: .5em 0;
 }
 
@@ -15,11 +15,7 @@
     border-top: 0px;
 }
 
-.reviews pre{
-	white-space: pre-wrap;
-}
-
-.reviews .list-group-item{
+.revisions .list-group-item{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -53,7 +49,7 @@
 		grid-gap: 1em 2%;
 	}
 
-	.lesson-container h3, .review-buttons, .reviews{
+	.lesson-container h3, .review-buttons, .revisions{
 		grid-column: 1;
 	}
 

@@ -6,8 +6,7 @@ use App\Lesson_type;
 use App\Lesson;
 use Illuminate\Http\Request;
 use App\User;
-use App\Review;
-use App\Review_status;
+use App\Revision;
 use App\Traits\GenerateBreadcrumbs;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -74,19 +73,13 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson)
     {
+        $history = null;
+        $current_revision = $lesson->current_revision();
+
         if(Auth::user()->type == 'teacher')
         {
-            $history = $lesson->reviews;
-            $review = $history->first();
+            $history = $lesson->revisions;
             unset($history[0]);
-        }
-        else
-        {
-            $history = null;
-            $review = $lesson->reviews()
-                ->where('review_status_id', Review_status::COMPLETE)
-                ->where('sv_do_path', '<>', null)
-                ->first();
         }
 
         return view('lessons.show')
@@ -95,7 +88,7 @@ class LessonController extends Controller
             ->with('term', $lesson->lesson_type->term)
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
-            ->with('review', $review)
+            ->with('revision', $current_revision)
             ->with('history', $history)
             ->with('breadcrumbs', $this->breadcrumbs($lesson));
     }

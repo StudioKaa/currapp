@@ -25,7 +25,7 @@
           <div class="btn-group" data-toggle="buttons"> 
             @foreach($statuses as $status) 
             <label class="btn btn-outline-primary" for="status{{ $status->id }}"> 
-              <input class="form-check-input" type="radio" name="review_status_id" id="status{{ $status->id }}" value="{{ $status->id }}"> 
+              <input class="form-check-input" type="radio" name="status_id" id="status{{ $status->id }}" value="{{ $status->id }}"> 
                 {{ $status->title }} 
              </label> 
           @endforeach 

@@ -3,23 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Review_status;
+use App\Status;
 use App\User;
 
-class Review extends Model
+class Revision extends Model
 {
+    
     const TYPE_FILE = 0;
     const TYPE_WIKI = 1;
-    const TYPE_TEXT = 2;
 
-    public function status()
+    public function getStatusAttribute($value)
     {
-    	$status = Review_status::find($this->review_status_id);
-    	if($status->is(Review_status::COMPLETE) && $this->sv_filename == null)
-		{
-			$status = Review_status::get(Review_status::COMPLETE_SV_MISSING);
-		}
-		return $status;
+        return new Status($value);
     }
 
     public function reviewer()

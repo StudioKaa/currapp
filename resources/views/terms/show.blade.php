@@ -44,7 +44,7 @@
             </div>
             
             @foreach($lesson_type->lessons()->get() as $lesson) 
-                <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }} bg-{{ $lesson->status()->context_class }}" title="{{ $lesson->status()->title }}">
+                <div class="card duration-{{ $lesson->duration }} start-{{ $lesson->week_start }} bg-{{ $lesson->status()->class }}" title="{{ $lesson->status()->title }}">
                     <div class="card-body">
                         <p class="card-title"><a href="/lessons/{{ $lesson->id }}">{{ $lesson->title }}</a></p>
                     </div>

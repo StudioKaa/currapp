@@ -29,34 +29,26 @@ Carbon::setLocale(config('app.locale'));
 
     @if(Auth::user()->type == 'teacher')
         <div class="btn-group review-buttons">
-            <span class="btn btn-outline-primary">{{ $review == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
+            <span class="btn btn-outline-primary">{{ $revision == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
             <a href="/lessons/{{ $lesson->id }}/reviews/create/file" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> <span>bestand</span></a>
             <a href="/lessons/{{ $lesson->id }}/reviews/create/wiki" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> <span>wiki</span></a>
             <a href="/lessons/{{ $lesson->id }}/reviews/create/text" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> <span>tekst</span></a>
         </div>
     @endif
 
-    <div class="reviews">
-        @if($review == null)
-            <p>Voor deze les is nog geen reader beschikbaar.<br />Heb je deze les al gehad? Vraag je docent dan om de reader te uploaden!</p>
-        @elseif($review->type == \App\Review::TYPE_TEXT)
-            @if(Auth::user()->type == 'student')
-                <p>Voor deze les is geen reader beschikbaar.<br />De docent legt in de les uit wat je gaat doen.</p>
-            @else
-                <pre>{{ $review->comment }}</pre>
-            @endif
-        @else    
-            @if(Auth::user()->type == 'teacher')
-                @include('reviews.partial_teacher')
-                <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
-                <div class="collapse" id="history-content">
-                    @foreach($history as $review)
-                        @include('reviews.partial_teacher')
-                    @endforeach
-                </div>
-            @elseif(Auth::user()->type == 'student')
-                @include('reviews.partial_student')
-            @endif
+    <div class="revisions">
+        @if($revision == null)
+            <p>Voor deze les is (nog) geen reader beschikbaar.</p>
+        @elseif(Auth::user()->type == 'teacher')
+            @include('revisions.partial_teacher')
+            <h6 class="my-spacing" id="history-title"><a data-toggle="collapse" class="collapsed" href="#history-content">Geschiedenis <span>&raquo;</span></a></h6>
+            <div class="collapse" id="history-content">
+                @foreach($history as $revision)
+                    @include('revisions.partial_teacher')
+                @endforeach
+            </div>
+        @elseif(Auth::user()->type == 'student')
+            @include('revisions.partial_student')
         @endif
     </div>
 
