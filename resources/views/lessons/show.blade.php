@@ -28,11 +28,10 @@ Carbon::setLocale(config('app.locale'));
     <h3>{{ $lesson_type->title }}: {{ $lesson->title }}</h3>
 
     @if(Auth::user()->type == 'teacher')
-        <div class="btn-group review-buttons">
+        <div class="btn-group revision-buttons">
             <span class="btn btn-outline-primary">{{ $revision == null ? 'Eerste' : 'Nieuwe' }} versie:</span>
-            <a href="/lessons/{{ $lesson->id }}/reviews/create/file" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> <span>bestand</span></a>
-            <a href="/lessons/{{ $lesson->id }}/reviews/create/wiki" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> <span>wiki</span></a>
-            <a href="/lessons/{{ $lesson->id }}/reviews/create/text" class="card-link btn btn-outline-primary"><i class="fa fa-font"></i> <span>tekst</span></a>
+            <a href="{{ route('revisions.create.file', $lesson) }}" class="card-link btn btn-outline-primary"><i class="fa fa-file-text-o"></i> <span>bestand</span></a>
+            <a href="{{ route('revisions.create.wiki', $lesson) }}" class="card-link btn btn-outline-primary"><i class="fa fa-link"></i> <span>wiki</span></a>
         </div>
     @endif
 

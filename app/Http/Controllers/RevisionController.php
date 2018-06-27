@@ -46,13 +46,13 @@ class RevisionController extends Controller
 
     public function addfiles_form(Revision $revision)
     {
-        return view('reviews.addfiles')
+        return view('revisions.addfiles')
             ->with('education', $revision->lesson->lesson_type->term->cohort->education)
             ->with('cohort', $revision->lesson->lesson_type->term->cohort)
             ->with('term', $revision->lesson->lesson_type->term)
             ->with('lesson_type', $revision->lesson->lesson_type)
             ->with('lesson', $revision->lesson)
-            ->with('review', $revision);
+            ->with('revision', $revision);
     }
 
     public function addfiles_store(Request $request, Revision $revision)

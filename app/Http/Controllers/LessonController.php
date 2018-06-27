@@ -153,12 +153,12 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
-        foreach($lesson->reviews as $review)
+        foreach($lesson->revisions as $revision)
         {
             Storage::disk('spaces')->delete([
-                $review->wv_do_path,
-                $review->tv_do_path,
-                $review->sv_do_path
+                $revision->wv_do_path,
+                $revision->tv_do_path,
+                $revision->sv_do_path
             ]);
         }
 

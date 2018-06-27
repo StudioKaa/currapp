@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <form method="POST" action="/reviews/{{ $review->id }}/addfiles" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('revisions.update.files', $revision) }}" enctype="multipart/form-data">
       {{ method_field('PATCH') }}
 
     	@include('layouts/errors')
@@ -40,7 +40,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Werkversie</label>
         <div class="col-sm-10">
-          <a target="_blank" href="/reviews/{{ $review->id }}/wv">{{ $review->wv_filename }}</a>
+          <a target="_blank" href="{{ route('revisions.get.wv', $revision) }}">{{ $revision->wv_title }}</a>
         </div>
       </div>
       <div class="form-group row">

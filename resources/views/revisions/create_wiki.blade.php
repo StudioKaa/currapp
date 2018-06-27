@@ -8,28 +8,11 @@
 
 @section('content')
   
-    <form method="POST" action="/lessons/{{ $lesson->id }}/reviews/create/wiki">
+    <form method="POST" action="{{ route('revisions.store.wiki', $lesson) }}">
 
     	@include('layouts/errors')
 
-	  	<div class="form-group row">
-		    <label class="col-sm-2 col-form-label">Opleiding</label>
-  		  <div class="col-sm-10">
-  				<input type="text" readonly class="form-control-plaintext" value="{{ $education->title }}">
-  			</div>
-	  	</div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Cohort</label>
-        <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" value="{{ $cohort->start_year }} - {{ $cohort->exam_year }}">
-        </div>
-      </div>
-	  	<div class="form-group row">
-    		<label class="col-sm-2 col-form-label">Periode</label>
-    		<div class="col-sm-10">
-	    		<input type="text" readonly class="form-control-plaintext" value="{{ $term->title }}">
-	    	</div>
-  		</div>
+      
 	  	<div class="form-group row">
     		<label class="col-sm-2 col-form-label">Les</label>
     		<div class="col-sm-10">
@@ -37,12 +20,6 @@
 	    		<input type="hidden" name="lesson" value="{{ $lesson->id }}">
 	    	</div>
   		</div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Ontwikkelaar</label>
-        <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" value="{{ $review->author->name }}">
-        </div>
-      </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">Link naar wiki:</label>
         <div class="col-sm-10">

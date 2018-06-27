@@ -10,7 +10,7 @@ use App\Traits\SaveFiles;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class ReviewCreateController extends Controller
+class RevisionCreateController extends Controller
 {
 
     use SaveFiles;
@@ -22,16 +22,12 @@ class ReviewCreateController extends Controller
      */
     public function create_file(Lesson $lesson)
     {
-        $revision = new Revision();
-        $revision->author = \Auth::user();
-
         return view('revisions.create_file')
             ->with('education', $lesson->lesson_type->term->cohort->education)
             ->with('cohort', $lesson->lesson_type->term->cohort)
             ->with('term', $lesson->lesson_type->term)
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
-            ->with('review', $revision)
             ->with('statuses', Status::getPickables());
     }
 
@@ -67,16 +63,12 @@ class ReviewCreateController extends Controller
 
     public function create_wiki(Lesson $lesson)
     {
-        $review = new Review();
-        $review->author = \Auth::user();
-
-        return view('reviews.create_wiki')
+        return view('revisions.create_wiki')
             ->with('education', $lesson->lesson_type->term->cohort->education)
             ->with('cohort', $lesson->lesson_type->term->cohort)
             ->with('term', $lesson->lesson_type->term)
             ->with('lesson_type', $lesson->lesson_type)
             ->with('lesson', $lesson)
-            ->with('review', $review)
             ->with('users', User::all());
     }
 
@@ -91,20 +83,19 @@ class ReviewCreateController extends Controller
 
         $wiki_base = 'https://wiki.amo.rocks/wiki/';
 
-        $review = new Review();
-        $review->lesson_id = request('lesson');
-        $review->review_status_id = Review_status::COMPLETE;
-        $review->author_id = \Auth::user()->id;
-        $review->type = Review::TYPE_WIKI;
-        $review->reviewer_id = null; 
-        $review->wv_filename = 'Wiki: werkversie';
-        $review->wv_do_path = $wiki_base . request('wiki');
-        $review->tv_filename = 'Wiki: docentversie';
-        $review->tv_do_path = $wiki_base . request('wiki') . '/Docent';
-        $review->sv_filename = 'Wiki: studentversie';
-        $review->sv_do_path = $wiki_base . request('wiki') . '/pdf';
+        $revision = new Revision();
+        $revision->lesson_id = request('lesson');
+        $revision->status = Status::COMPLETE;
+        $revision->author_id = \Auth::user()->id;
+        $revision->type = Revision::TYPE_WIKI;
+        $revision->wv_title = 'Wiki: werkversie';
+        $revision->wv_path = $wiki_base . request('wiki');
+        $revision->tv_title = 'Wiki: docentversie';
+        $revision->tv_path = $wiki_base . request('wiki') . '/Docent';
+        $revision->sv_title = 'Wiki: studentversie';
+        $revision->sv_path = $wiki_base . request('wiki') . '/pdf';
 
-        $review->save();
+        $revision->save();
         
         return redirect('/lessons/' . request('lesson'));
     }

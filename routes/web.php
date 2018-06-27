@@ -16,18 +16,15 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::get('lessons/{lesson}/assets/create/link', 'AssetController@create_link')->name('lessons.assets.create.link');;
 		Route::post('lessons/{lesson}/assets/create/link', 'AssetController@store_link')->name('lessons.assets.store.link');;
 		
-		Route::get('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@create_file');
-		Route::post('lessons/{lesson}/reviews/create/file', 'ReviewCreateController@store_file');
-		Route::get('lessons/{lesson}/reviews/create/wiki', 'ReviewCreateController@create_wiki');
-		Route::post('lessons/{lesson}/reviews/create/wiki', 'ReviewCreateController@store_wiki');
-		Route::get('lessons/{lesson}/reviews/create/text', 'ReviewCreateController@create_text');
-		Route::post('lessons/{lesson}/reviews/create/text', 'ReviewCreateController@store_text');
+		Route::get('lessons/{lesson}/revisions/create/file', 'RevisionCreateController@create_file')->name('revisions.create.file');
+		Route::post('lessons/{lesson}/revisions/create/file', 'RevisionCreateController@store_file')->name('revisions.store.file');
+		Route::get('lessons/{lesson}/revisions/create/wiki', 'RevisionCreateController@create_wiki')->name('revisions.create.wiki');
+		Route::post('lessons/{lesson}/revisions/create/wiki', 'RevisionCreateController@store_wiki')->name('revisions.store.wiki');
 
-		Route::resource('reviews', 'ReviewController', ['only' => ['edit', 'update']]);
-		Route::get('reviews/{review}/addfiles', 'ReviewController@addfiles_form');
-		Route::patch('reviews/{review}/addfiles', 'ReviewController@addfiles_store');
-		Route::get('reviews/{revision}/wv', 'RevisionController@get_file_wv')->name('revisions.get.wv');
-		Route::get('reviews/{revision}/tv', 'RevisionController@get_file_tv')->name('revisions.get.tv');
+		Route::get('revisions/{revision}/addfiles', 'RevisionController@addfiles_form')->name('revisions.edit.files');
+		Route::patch('revisions/{revision}/addfiles', 'RevisionController@addfiles_store')->name('revisions.update.files');
+		Route::get('revisions/{revision}/wv', 'RevisionController@get_file_wv')->name('revisions.get.wv');
+		Route::get('revisions/{revision}/tv', 'RevisionController@get_file_tv')->name('revisions.get.tv');
 	});
 
 	Route::redirect('/', '/educations', 301);
@@ -39,7 +36,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/terms/{term}', 'TermController@show')->name('terms.show');
 	Route::get('/terms/find/{id}', 'TermController@find');
 	Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
-	Route::get('reviews/{revision}/sv', 'RevisionController@get_file_sv')->name('revisions.get.sv');
+	Route::get('revisions/{revision}/sv', 'RevisionController@get_file_sv')->name('revisions.get.sv');
 });
 
 if(env('APP_ENV') == 'production')

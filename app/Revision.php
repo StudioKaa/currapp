@@ -17,11 +17,6 @@ class Revision extends Model
         return new Status($value);
     }
 
-    public function reviewer()
-    {
-    	return User::find($this->reviewer_id);
-    }
-
     public function author()
     {
         return User::find($this->author_id);
