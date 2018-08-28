@@ -39,6 +39,7 @@ class EducationController extends Controller
             {
                 $term = $cohort->terms()
                     ->whereBetween('order', [$education->terms_per_year*$i+1, $education->terms_per_year*$studyyear])
+                    ->orderBy('order')
                     ->get();
                 if(count($term))
                 {
